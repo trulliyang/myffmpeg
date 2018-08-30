@@ -1,7 +1,13 @@
 #include <jni.h>
 #include <string>
+extern "C"
+{
+#include <libavcodec/avcodec.h>
+#include <libavformat/avformat.h>
+#include <libavfilter/avfilter.h>
 
-extern "C" JNIEXPORT jstring
+
+JNIEXPORT jstring
 JNICALL
 Java_com_example_shiyang1_myffmpeg_MainActivity_stringFromJNI(
         JNIEnv *env, jobject) {
@@ -9,16 +15,8 @@ Java_com_example_shiyang1_myffmpeg_MainActivity_stringFromJNI(
     return env->NewStringUTF(hello.c_str());
 }
 
-#include <jni.h>
-#include <string>
-
-extern "C"
-{
-#include <libavcodec/avcodec.h>
-#include <libavformat/avformat.h>
-#include <libavfilter/avfilter.h>
-
-jstring
+JNIEXPORT jstring
+JNICALL
 Java_com_example_shiyang1_myffmpeg_MainActivity_urlprotocolinfo(
         JNIEnv *env, jobject) {
     char info[40000] = {0};
@@ -40,7 +38,8 @@ Java_com_example_shiyang1_myffmpeg_MainActivity_urlprotocolinfo(
     return env->NewStringUTF(info);
 }
 
-jstring
+JNIEXPORT jstring
+JNICALL
 Java_com_example_shiyang1_myffmpeg_MainActivity_avformatinfo(
         JNIEnv *env, jobject) {
     char info[40000] = {0};
@@ -60,7 +59,8 @@ Java_com_example_shiyang1_myffmpeg_MainActivity_avformatinfo(
     return env->NewStringUTF(info);
 }
 
-jstring
+JNIEXPORT jstring
+JNICALL
 Java_com_example_shiyang1_myffmpeg_MainActivity_avcodecinfo(
         JNIEnv *env, jobject) {
     char info[40000] = {0};
@@ -93,7 +93,8 @@ Java_com_example_shiyang1_myffmpeg_MainActivity_avcodecinfo(
     return env->NewStringUTF(info);
 }
 
-jstring
+JNIEXPORT jstring
+JNICALL
 Java_com_example_shiyang1_myffmpeg_MainActivity_avfilterinfo(
         JNIEnv *env, jobject) {
     char info[40000] = {0};
@@ -106,5 +107,4 @@ Java_com_example_shiyang1_myffmpeg_MainActivity_avfilterinfo(
     }
     return env->NewStringUTF(info);
 }
-
 }
