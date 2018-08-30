@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
 
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
-        tv.setText(stringFromJNI());
+        tv.setText(String.format("%s,%s,%s,%s,%s", stringFromJNI(), urlprotocolinfo(), avformatinfo(), avcodecinfo(), avfilterinfo()));
     }
 
     /**
@@ -26,4 +26,8 @@ public class MainActivity extends Activity {
      * which is packaged with this application.
      */
     public native String stringFromJNI();
+    public native String urlprotocolinfo();
+    public native String avformatinfo();
+    public native String avcodecinfo();
+    public native String avfilterinfo();
 }
