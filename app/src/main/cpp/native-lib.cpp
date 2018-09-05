@@ -1,17 +1,18 @@
 #include <jni.h>
 #include <string>
+
 extern "C"
 {
+
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
 #include <libavfilter/avfilter.h>
-
 
 JNIEXPORT jstring
 JNICALL
 Java_com_example_shiyang1_myffmpeg_MainActivity_stringFromJNI(
         JNIEnv *env, jobject) {
-    std::string hello = "Hello from C++";
+    std::string hello = "Fuck FFmpeg from C++";
     return env->NewStringUTF(hello.c_str());
 }
 
@@ -107,4 +108,20 @@ Java_com_example_shiyang1_myffmpeg_MainActivity_avfilterinfo(
     }
     return env->NewStringUTF(info);
 }
+
+JNIEXPORT jstring
+JNICALL
+Java_com_example_shiyang1_myffmpeg_MainActivity_yuv2mp4(
+        JNIEnv *env, jobject) {
+    char info[40000] = {0};
+    avfilter_register_all();
+
+    AVFilter *f_temp = (AVFilter *)avfilter_next(NULL);
+    while(f_temp != NULL) {
+        sprintf(info, "%s%s\n", info, f_temp->name);
+        f_temp = f_temp->next;
+    }
+    return env->NewStringUTF(info);
+}
+
 }
