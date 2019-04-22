@@ -1,8 +1,6 @@
 package com.example.shiyang1.myffmpeg.node;
 
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
@@ -18,7 +16,7 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-public class FFGLFirstNode extends FFGLNode {
+public class FFGLSecondNode extends FFGLNode {
 
     private Context mContext;
 
@@ -50,20 +48,13 @@ public class FFGLFirstNode extends FFGLNode {
     private int mTexture0OriginalWidth = 0;
     private int mTexture0OriginalHeight = 0;
 
+    private int mDisplayWidth = 0;
+    private int mDisplayHeight = 0;
+
+    private float mWidthScale = 1.0f;
+    private float mHeightScale = 1.0f;
 
     private String mVertexShaderString = " \n" +
-            "attribute vec2 aPosition; \n" +
-            "void main() { \n" +
-            "    gl_Position = vec4(aPosition, 0.0, 1.0); \n" +
-            "} \n";
-
-    private String mFragmentShaderString = " \n" +
-            "precision mediump float; \n" +
-            "void main() { \n" +
-            "    gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0); \n" +
-            "} \n";
-
-    private String mVertexShaderString1 = " \n" +
             "attribute vec2 aTextureCoordinates; \n" +
             "attribute vec2 aPosition; \n" +
             "varying vec2 vTexCoord; \n" +
@@ -72,21 +63,33 @@ public class FFGLFirstNode extends FFGLNode {
             "    vTexCoord = aTextureCoordinates; \n" +
             "} \n";
 
+    private String mFragmentShaderString = " \n" +
+            "precision mediump float; \n" +
+            "varying vec2 vTexCoord; \n" +
+            "uniform sampler2D uTexture0; \n"  +
+            "void main() { \n" +
+            "    gl_FragColor = texture2D(uTexture0, vTexCoord); \n" +
+            "} \n";
+
+    private String mVertexShaderString1 = " \n" +
+            "attribute vec2 aTextureCoordinates; \n" +
+            "attribute vec2 aPosition; \n" +
+            "varying vec2 vTexCoord; \n" +
+            "void main() { \n" +
+            "    gl_Position = vec4(aPosition, 0.0, 1.0); \n" +
+            "    vTexCoord = vec2(aTextureCoordinates.x, 1.0 - aTextureCoordinates.y); \n" +
+            "} \n";
+
     private String mFragmentShaderString1 = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
+            "uniform sampler2D uTexture0; \n"  +
+
             "void main() { \n" +
-            "    if (vTexCoord.x<0.5 && vTexCoord.y<0.5) " +
-            "        gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); \n" +
-            "    if (vTexCoord.x>=0.5 && vTexCoord.y<0.5) " +
-            "        gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0); \n" +
-            "    if (vTexCoord.x<0.5 && vTexCoord.y>=0.5) " +
-            "        gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0); \n" +
-            "    if (vTexCoord.x>=0.5 && vTexCoord.y>=0.5) " +
-            "        gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0); \n" +
+            "    gl_FragColor = texture2D(uTexture0, vTexCoord); \n" +
             "} \n";
 
-    public FFGLFirstNode(Context context) {
+    public FFGLSecondNode(Context context) {
         mContext = context;
     }
 
@@ -134,12 +137,7 @@ public class FFGLFirstNode extends FFGLNode {
 
     @Override
     public void destroy() {
-        if (mTexture0ID > 0) {
-            int[] tex = new int[1];
-            tex[0] = mTexture0ID;
-            GLES20.glDeleteTextures(1, tex, 0);
-            mTexture0ID = -200;
-        }
+
     }
 
     private void initTexture() {
@@ -199,7 +197,7 @@ public class FFGLFirstNode extends FFGLNode {
     }
 
     private void updateTexture() {
-        InputStream is = mContext.getResources().openRawResource(R.raw.sun);
+        InputStream is = mContext.getResources().openRawResource(R.raw.colorful2);
         Bitmap bitmap = BitmapFactory.decodeStream(is);
         mTexture0OriginalWidth = bitmap.getWidth();
         mTexture0OriginalHeight = bitmap.getHeight();

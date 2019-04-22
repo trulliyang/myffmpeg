@@ -29,7 +29,7 @@ public class FFGLSurfaceView extends GLSurfaceView {
     }
 
     private void init() {
-        mRenderer = new FFGLRenderer();
+        mRenderer = new FFGLRenderer(this.getContext());
         setEGLContextClientVersion(2);
         setRenderer(mRenderer);
         setRenderMode(RENDERMODE_CONTINUOUSLY);

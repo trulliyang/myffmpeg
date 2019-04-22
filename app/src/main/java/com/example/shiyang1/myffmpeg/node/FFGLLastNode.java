@@ -1,26 +1,16 @@
 package com.example.shiyang1.myffmpeg.node;
 
-import android.content.Context;
-import android.content.res.AssetFileDescriptor;
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
-import android.opengl.GLUtils;
 
-import com.example.shiyang1.myffmpeg.R;
 import com.example.shiyang1.myffmpeg.utils.FFGLShaderUtils;
 import com.example.shiyang1.myffmpeg.utils.FFGLTextureUtils;
 
-import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-public class FFGLFirstNode extends FFGLNode {
-
-    private Context mContext;
+public class FFGLLastNode extends FFGLNode {
 
     private int mShaderProgramID = -111;
     private int mTexture0ID = -200;
@@ -47,48 +37,26 @@ public class FFGLFirstNode extends FFGLNode {
     private int mTexture6Handle = -366;
     private int mTexture7Handle = -377;
 
-    private int mTexture0OriginalWidth = 0;
-    private int mTexture0OriginalHeight = 0;
-
-
     private String mVertexShaderString = " \n" +
-            "attribute vec2 aPosition; \n" +
-            "void main() { \n" +
-            "    gl_Position = vec4(aPosition, 0.0, 1.0); \n" +
-            "} \n";
-
-    private String mFragmentShaderString = " \n" +
-            "precision mediump float; \n" +
-            "void main() { \n" +
-            "    gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0); \n" +
-            "} \n";
-
-    private String mVertexShaderString1 = " \n" +
             "attribute vec2 aTextureCoordinates; \n" +
             "attribute vec2 aPosition; \n" +
             "varying vec2 vTexCoord; \n" +
             "void main() { \n" +
             "    gl_Position = vec4(aPosition, 0.0, 1.0); \n" +
-            "    vTexCoord = aTextureCoordinates; \n" +
+            "    vTexCoord = vec2(aTextureCoordinates.x, 1.0 - aTextureCoordinates.y); \n" +
             "} \n";
 
-    private String mFragmentShaderString1 = " \n" +
+    private String mFragmentShaderString = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
+            "uniform sampler2D uTexture0; \n"  +
             "void main() { \n" +
-            "    if (vTexCoord.x<0.5 && vTexCoord.y<0.5) " +
-            "        gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); \n" +
-            "    if (vTexCoord.x>=0.5 && vTexCoord.y<0.5) " +
-            "        gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0); \n" +
-            "    if (vTexCoord.x<0.5 && vTexCoord.y>=0.5) " +
-            "        gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0); \n" +
-            "    if (vTexCoord.x>=0.5 && vTexCoord.y>=0.5) " +
-            "        gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0); \n" +
+//            "    vec4 color = texture2D(uTexture0, vTexCoord); \n" +
+            "    if (vTexCoord.x<0.5 && vTexCoord.y<0.5) gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); \n" +
+            "    if (vTexCoord.x>=0.5 && vTexCoord.y<0.5) gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0); \n" +
+            "    if (vTexCoord.x<0.5 && vTexCoord.y>=0.5) gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0); \n" +
+            "    if (vTexCoord.x>=0.5 && vTexCoord.y>=0.5) gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0); \n" +
             "} \n";
-
-    public FFGLFirstNode(Context context) {
-        mContext = context;
-    }
 
     @Override
     public void init() {
@@ -115,6 +83,10 @@ public class FFGLFirstNode extends FFGLNode {
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTexture0ID);
         GLES20.glUniform1i(mTexture0Handle, 0);
+//        GLES20.glUniform4f(mTargetColorHandle, mTargetColor[0], mTargetColor[1],mTargetColor[2], mTargetColor[3]);
+
+//        updateTexture();
+//        updateVertex();
         
         GLES20.glEnable(GLES20.GL_BLEND);
         GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);
@@ -134,22 +106,15 @@ public class FFGLFirstNode extends FFGLNode {
 
     @Override
     public void destroy() {
-        if (mTexture0ID > 0) {
-            int[] tex = new int[1];
-            tex[0] = mTexture0ID;
-            GLES20.glDeleteTextures(1, tex, 0);
-            mTexture0ID = -200;
-        }
+
     }
 
     private void initTexture() {
         mTexture0ID = FFGLTextureUtils.initTexture();
-        updateTexture();
     }
 
     private void initShader() {
         mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString, mFragmentShaderString);
-//        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString1, mFragmentShaderString1);
     }
 
     private void initAttribute(){
@@ -159,6 +124,7 @@ public class FFGLFirstNode extends FFGLNode {
 
     private void initUniform() {
         mTexture0Handle = GLES20.glGetUniformLocation(mShaderProgramID,"uTexture0");
+//        mTargetColorHandle = GLES20.glGetUniformLocation(mShaderProgramID,"uTargetColor");
     }
 
     private void initMesh() {
@@ -196,30 +162,6 @@ public class FFGLFirstNode extends FFGLNode {
         mIndicesBuffer = ib.asShortBuffer();
         mIndicesBuffer.put(i);
         mIndicesBuffer.position(0);
-    }
-
-    private void updateTexture() {
-        InputStream is = mContext.getResources().openRawResource(R.raw.sun);
-        Bitmap bitmap = BitmapFactory.decodeStream(is);
-        mTexture0OriginalWidth = bitmap.getWidth();
-        mTexture0OriginalHeight = bitmap.getHeight();
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTexture0ID);
-        GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
-        bitmap.recycle();
-        if (bitmap.isRecycled()) {
-            bitmap = null;
-        }
-    }
-
-    private void updateVertex() {
-
-    }
-
-    public void setTextureData(Bitmap bitmap) {
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTexture0ID);
-        GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
     }
 
 }

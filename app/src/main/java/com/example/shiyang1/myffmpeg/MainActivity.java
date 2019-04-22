@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-
 // video(mp4,webm)->data(yuv,rgba)->texture->shader->glsurfaceview
 
 public class MainActivity extends Activity implements Button.OnClickListener{

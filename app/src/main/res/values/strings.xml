@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">myffmpeg</string>
+    <string name="app_name">my</string>
     <string name="fuck_ffmpeg">Fuck FFmpeg From Java!</string>
-    <string name="fuck_ffmpeg_button_add">add fuck!</string>
-    <string name="fuck_ffmpeg_button_run">run fuck!</string>
+    <string name="fuck_ffmpeg_button_add">add</string>
+    <string name="fuck_ffmpeg_button_run">run</string>
 </resources>
