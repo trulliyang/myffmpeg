@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
+import android.util.Log;
 
 import com.example.shiyang1.myffmpeg.R;
 import com.example.shiyang1.myffmpeg.utils.FFGLShaderUtils;
@@ -30,6 +31,8 @@ public class FFGLFourthNode extends FFGLNode {
     private int mTexture6ID = -266;
     private int mTexture7ID = -277;
 
+    private float mProgress = 0.0f;
+
     private FloatBuffer mVerticesCoordinatesBuffer;
     private FloatBuffer mTextureCoordinatesBuffer;
     private ShortBuffer mIndicesBuffer;
@@ -44,6 +47,8 @@ public class FFGLFourthNode extends FFGLNode {
     private int mTexture5Handle = -355;
     private int mTexture6Handle = -366;
     private int mTexture7Handle = -377;
+
+    private int mProgressHandle = -200;
 
     private int mTexture0OriginalWidth = 0;
     private int mTexture0OriginalHeight = 0;
@@ -63,10 +68,11 @@ public class FFGLFourthNode extends FFGLNode {
             "varying vec2 vTexCoord; \n" +
             "uniform sampler2D uTexture0; \n"  +
             "uniform sampler2D uTexture1; \n"  +
+            "uniform float uProgress; \n"  +
             "void main() { \n" +
             "    vec4 color0 = texture2D(uTexture0, vTexCoord); \n" +
             "    vec4 color1 = texture2D(uTexture1, vTexCoord); \n" +
-            "    gl_FragColor = mix(color0, color1, 0.5);\n" +
+            "    gl_FragColor = mix(color0, color1, uProgress);\n" +
             "} \n";
 
     private String mVertexShaderString1 = " \n" +
@@ -101,8 +107,17 @@ public class FFGLFourthNode extends FFGLNode {
         initMesh();
     }
 
+    float dt = 0.0f;
+
     @Override
     public void update() {
+//        if (mProgress >= 1.0f) mProgress = -0.01f;
+//        mProgress += 0.01;
+//        if (mProgress > 1.0f) mProgress = 1.0f;
+//        else if (mProgress < 0.0f) mProgress = 0.0f;
+        dt += 0.01f;
+        mProgress = (float) Math.abs(Math.sin(dt));
+        Log.e("shiyang", "shiyang progress="+mProgress);
 
     }
 
@@ -121,6 +136,8 @@ public class FFGLFourthNode extends FFGLNode {
         GLES20.glActiveTexture(GLES20.GL_TEXTURE1);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTexture1ID);
         GLES20.glUniform1i(mTexture1Handle, 1);
+
+        GLES20.glUniform1f(mProgressHandle, mProgress);
 
         GLES20.glEnable(GLES20.GL_BLEND);
         GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);
@@ -174,6 +191,7 @@ public class FFGLFourthNode extends FFGLNode {
     private void initUniform() {
         mTexture0Handle = GLES20.glGetUniformLocation(mShaderProgramID,"uTexture0");
         mTexture1Handle = GLES20.glGetUniformLocation(mShaderProgramID,"uTexture1");
+        mProgressHandle = GLES20.glGetUniformLocation(mShaderProgramID,"uProgress");
     }
 
     private void initMesh() {
