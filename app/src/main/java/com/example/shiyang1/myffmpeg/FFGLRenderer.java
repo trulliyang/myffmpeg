@@ -7,6 +7,7 @@ import android.opengl.GLSurfaceView;
 import android.util.Log;
 
 import com.example.shiyang1.myffmpeg.node.FFGLFirstNode;
+import com.example.shiyang1.myffmpeg.node.FFGLFourthNode;
 import com.example.shiyang1.myffmpeg.node.FFGLSecondNode;
 import com.example.shiyang1.myffmpeg.node.FFGLThirdNode;
 
@@ -17,6 +18,7 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
     private FFGLFirstNode mFirstNode;
     private FFGLSecondNode mSecondNode;
     private FFGLThirdNode mThirdNode;
+    private FFGLFourthNode mFourthNode;
 //    private FFGLYUV2RGBANode mYuvNode;
 
     private Context mContext;
@@ -53,15 +55,21 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
             mThirdNode.update();
             mThirdNode.render();
         }
+        if (null != mFourthNode) {
+            mFourthNode.update();
+            mFourthNode.render();
+        }
     }
 
     private void init() {
-        mFirstNode = new FFGLFirstNode(mContext);
-        mFirstNode.init();
+//        mFirstNode = new FFGLFirstNode(mContext);
+//        mFirstNode.init();
 //        mSecondNode = new FFGLSecondNode(mContext);
 //        mSecondNode.init();
 //        mThirdNode = new FFGLThirdNode(mContext);
 //        mThirdNode.init();
+        mFourthNode = new FFGLFourthNode(mContext);
+        mFourthNode.init();
     }
 
     public void destroy() {
@@ -76,6 +84,10 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
         if (null != mThirdNode) {
             mThirdNode.destroy();
             mThirdNode = null;
+        }
+        if (null != mFourthNode) {
+            mFourthNode.destroy();
+            mFourthNode = null;
         }
     }
 }

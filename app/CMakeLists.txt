@@ -61,7 +61,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
 add_library( native-lib
              SHARED
-             src/main/cpp/native-lib.cpp )
+             src/main/cpp/native-lib.cpp
+             src/main/cpp/myDecode.cpp
+             src/main/cpp/myDecode.h
+             )
 
 include_directories(libs/include)
 
