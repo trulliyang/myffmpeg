@@ -12,6 +12,7 @@ import com.example.shiyang1.myffmpeg.utils.FFGLShaderUtils;
 import com.example.shiyang1.myffmpeg.utils.FFGLTextureUtils;
 
 import java.io.InputStream;
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -53,6 +54,8 @@ public class FFGLFourthNode extends FFGLNode {
     private int mTexture0OriginalWidth = 0;
     private int mTexture0OriginalHeight = 0;
 
+    private ByteBuffer mGLReadPixelBuffer;
+    private Bitmap mBitmapDump;
 
     private String mVertexShaderString = " \n" +
             "attribute vec2 aTextureCoordinates; \n" +
@@ -117,7 +120,7 @@ public class FFGLFourthNode extends FFGLNode {
 //        else if (mProgress < 0.0f) mProgress = 0.0f;
         dt += 0.01f;
         mProgress = (float) Math.abs(Math.sin(dt));
-        Log.e("shiyang", "shiyang progress="+mProgress);
+//        Log.e("shiyang", "shiyang progress="+mProgress);
 
     }
 
@@ -153,6 +156,15 @@ public class FFGLFourthNode extends FFGLNode {
         GLES20.glDisableVertexAttribArray(mTextureCoordinatesHandle);
         GLES20.glUseProgram(0);
 
+//        ByteBuffer buf = ByteBuffer.allocateDirect(mTexture0OriginalWidth*mTexture0OriginalHeight*4);
+//        buf.order(ByteOrder.nativeOrder());
+        mGLReadPixelBuffer = ByteBuffer.allocateDirect(mTexture0OriginalWidth*mTexture0OriginalHeight*4);
+        mGLReadPixelBuffer.order(ByteOrder.nativeOrder());
+        GLES20.glReadPixels(0, 0, mTexture0OriginalWidth, mTexture0OriginalHeight, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, mGLReadPixelBuffer);
+
+        byte[] bytes = new byte[mGLReadPixelBuffer.capacity()];
+        mGLReadPixelBuffer.get(bytes, 0, bytes.length);
+        mBitmapDump = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 
     @Override
@@ -183,7 +195,7 @@ public class FFGLFourthNode extends FFGLNode {
 //        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString1, mFragmentShaderString1);
     }
 
-    private void initAttribute(){
+    private void initAttribute() {
         mPositionHandle = GLES20.glGetAttribLocation(mShaderProgramID,"aPosition");
         mTextureCoordinatesHandle = GLES20.glGetAttribLocation(mShaderProgramID,"aTextureCoordinates");
     }
