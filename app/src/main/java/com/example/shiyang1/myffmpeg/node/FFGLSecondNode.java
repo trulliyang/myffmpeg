@@ -150,7 +150,7 @@ public class FFGLSecondNode extends FFGLNode {
 //        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString1, mFragmentShaderString1);
     }
 
-    private void initAttribute(){
+    private void initAttribute() {
         mPositionHandle = GLES20.glGetAttribLocation(mShaderProgramID,"aPosition");
         mTextureCoordinatesHandle = GLES20.glGetAttribLocation(mShaderProgramID,"aTextureCoordinates");
     }
