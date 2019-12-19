@@ -35,7 +35,7 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         Log.e("shiyang", "shiyang vp (w,h)="+width+","+height);
-        GLES20.glViewport(0, 0, width, height);
+        GLES20.glViewport(0, 0, 960, 720);
         GLES20.glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
     }
 

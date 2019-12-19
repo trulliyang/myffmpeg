@@ -692,6 +692,7 @@ public class FFGLFourthNode extends FFGLNode {
 //        else if (mProgress < 0.0f) mProgress = 0.0f;
         dt += 0.01f;
         mProgress = (float) Math.abs(Math.sin(dt));
+//        mProgress = 14.0f/15.0f;
 //        Log.e("shiyang", "shiyang progress="+mProgress);
 
     }
@@ -760,11 +761,11 @@ public class FFGLFourthNode extends FFGLNode {
 
     private void initTexture() {
         mTexture0ID = FFGLTextureUtils.initTexture();
-        int rId0 = R.raw.a000;
+        int rId0 = R.raw.a010;
         updateTexture(rId0, mTexture0ID);
 
         mTexture1ID = FFGLTextureUtils.initTexture();
-        int rId1 = R.raw.a001;
+        int rId1 = R.raw.a011;
         updateTexture(rId1, mTexture1ID);
 
         mTexture2ID = FFGLTextureUtils.initTexture();
@@ -795,25 +796,25 @@ public class FFGLFourthNode extends FFGLNode {
 
     private void initShader() {
         String fs = mFragmentShaderStringFadeInOut;
-        fs = mFragmentShaderStringZoomIn;
-        fs = mFragmentShaderStringZoomOut;
-        fs = mFragmentShaderStringMoveLeft;
-        fs = mFragmentShaderStringMoveRight;
-        fs = mFragmentShaderStringMoveUp;
-        fs = mFragmentShaderStringMoveDown;
-        fs = mFragmentShaderStringZoomInPro;
-        fs = mFragmentShaderStringZoomOutPro;
-        fs = mFragmentShaderStringMoveLeftPro;
-        fs = mFragmentShaderStringMoveRightPro;
-        fs = mFragmentShaderStringMoveTopPro;
-        fs = mFragmentShaderStringMoveBottomPro;
-        fs = mFragmentShaderStringMoveLeftTopPro;
-        fs = mFragmentShaderStringMoveLeftBottomPro;
-        fs = mFragmentShaderStringMoveRightTopPro;
-        fs = mFragmentShaderStringMoveRightBottomPro;
-        fs = mFragmentShaderStringRotateCCWPro;
-        fs = mFragmentShaderStringRotateCWPro;
-        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString, fs);
+//        fs = mFragmentShaderStringZoomIn;
+//        fs = mFragmentShaderStringZoomOut;
+//        fs = mFragmentShaderStringMoveLeft;
+//        fs = mFragmentShaderStringMoveRight;
+//        fs = mFragmentShaderStringMoveUp;
+//        fs = mFragmentShaderStringMoveDown;
+        String fs0 = mFragmentShaderStringZoomInPro;
+        String fs1 = mFragmentShaderStringZoomOutPro;
+        String fs2 = mFragmentShaderStringMoveLeftPro;
+        String fs3 = mFragmentShaderStringMoveRightPro;
+        String fs4 = mFragmentShaderStringMoveTopPro;
+        String fs5 = mFragmentShaderStringMoveBottomPro;
+        String fs6 = mFragmentShaderStringMoveLeftTopPro;
+        String fs7 = mFragmentShaderStringMoveLeftBottomPro;
+        String fs8 = mFragmentShaderStringMoveRightTopPro;
+        String fs9 = mFragmentShaderStringMoveRightBottomPro;
+        String fs10 = mFragmentShaderStringRotateCCWPro;
+        String fs11 = mFragmentShaderStringRotateCWPro;
+        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString, fs11);
 //        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString1, mFragmentShaderString1);
     }
 
