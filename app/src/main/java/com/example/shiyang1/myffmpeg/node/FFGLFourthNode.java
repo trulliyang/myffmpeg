@@ -73,9 +73,9 @@ public class FFGLFourthNode extends FFGLNode {
     private String mFragmentShaderStringFadeInOut = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
-            "uniform sampler2D uTexture1; \n"  +
-            "uniform float uProgress; \n"  +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
             "void main() { \n" +
             "    vec4 color0 = texture2D(uTexture0, vTexCoord);\n" +
             "    vec4 color1 = texture2D(uTexture1, vTexCoord);\n" +
@@ -85,9 +85,9 @@ public class FFGLFourthNode extends FFGLNode {
     private String mFragmentShaderStringZoomIn = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
-            "uniform sampler2D uTexture1; \n"  +
-            "uniform float uProgress; \n"  +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
             "void main() { \n" +
             "    vec4 color = texture2D(uTexture0, vTexCoord);\n" +
             "    vec2 tc = (vTexCoord-vec2(0.5))*uProgress + vec2(0.5);\n" +
@@ -101,9 +101,9 @@ public class FFGLFourthNode extends FFGLNode {
     private String mFragmentShaderStringZoomOut = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
-            "uniform sampler2D uTexture1; \n"  +
-            "uniform float uProgress; \n"  +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
             "void main() { \n" +
             "    vec4 color = texture2D(uTexture0, vTexCoord);\n" +
             "    vec2 tc = (vTexCoord-vec2(0.5))/uProgress + vec2(0.5);\n" +
@@ -117,9 +117,9 @@ public class FFGLFourthNode extends FFGLNode {
     private String mFragmentShaderStringMoveLeft = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
-            "uniform sampler2D uTexture1; \n"  +
-            "uniform float uProgress; \n"  +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
             "void main() { \n" +
             "    vec2 tc = vTexCoord + vec2(uProgress, 0.0);\n" +
             "    vec4 color = texture2D(uTexture0, tc);\n" +
@@ -132,9 +132,9 @@ public class FFGLFourthNode extends FFGLNode {
     private String mFragmentShaderStringMoveRight = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
-            "uniform sampler2D uTexture1; \n"  +
-            "uniform float uProgress; \n"  +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
             "void main() { \n" +
             "    vec2 tc = vTexCoord - vec2(uProgress, 0.0);\n" +
             "    vec4 color = texture2D(uTexture0, tc);\n" +
@@ -147,9 +147,9 @@ public class FFGLFourthNode extends FFGLNode {
     private String mFragmentShaderStringMoveUp = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
-            "uniform sampler2D uTexture1; \n"  +
-            "uniform float uProgress; \n"  +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
             "void main() { \n" +
             "    vec2 tc = vTexCoord + vec2(0.0, uProgress);\n" +
             "    vec4 color = texture2D(uTexture0, tc);\n" +
@@ -162,9 +162,9 @@ public class FFGLFourthNode extends FFGLNode {
     private String mFragmentShaderStringMoveDown = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
-            "uniform sampler2D uTexture1; \n"  +
-            "uniform float uProgress; \n"  +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
             "void main() { \n" +
             "    vec2 tc = vTexCoord - vec2(0.0, uProgress);\n" +
             "    vec4 color = texture2D(uTexture0, tc);\n" +
@@ -177,9 +177,9 @@ public class FFGLFourthNode extends FFGLNode {
     private String mFragmentShaderStringZoomInPro = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
-            "uniform sampler2D uTexture1; \n"  +
-            "uniform float uProgress; \n"  +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
 
             "vec4 getColor(vec2 tc) { \n" +
             "    float s0 = 1.0-uProgress;\n" +
@@ -218,9 +218,9 @@ public class FFGLFourthNode extends FFGLNode {
     private String mFragmentShaderStringZoomOutPro = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
-            "uniform sampler2D uTexture1; \n"  +
-            "uniform float uProgress; \n"  +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
 
             "vec4 getColor(vec2 tc) { \n" +
             "    float s0 = 1.0+uProgress;\n" +
@@ -259,9 +259,9 @@ public class FFGLFourthNode extends FFGLNode {
     private String mFragmentShaderStringMoveLeftPro = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
-            "uniform sampler2D uTexture1; \n"  +
-            "uniform float uProgress; \n"  +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
 
             "vec4 getColor(vec2 tc) { \n" +
             "    vec2 tl0 = vec2(uProgress, 0.0);\n" +
@@ -296,9 +296,9 @@ public class FFGLFourthNode extends FFGLNode {
     private String mFragmentShaderStringMoveRightPro = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
-            "uniform sampler2D uTexture1; \n"  +
-            "uniform float uProgress; \n"  +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
 
             "vec4 getColor(vec2 tc) { \n" +
             "    vec2 tl0 = vec2(-uProgress, 0.0); \n" +
@@ -333,9 +333,9 @@ public class FFGLFourthNode extends FFGLNode {
     private String mFragmentShaderStringMoveTopPro = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
-            "uniform sampler2D uTexture1; \n"  +
-            "uniform float uProgress; \n"  +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
 
             "vec4 getColor(vec2 tc) { \n" +
             "    vec2 tl0 = vec2(0.0, uProgress); \n" +
@@ -371,9 +371,9 @@ public class FFGLFourthNode extends FFGLNode {
     private String mFragmentShaderStringMoveBottomPro = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
-            "uniform sampler2D uTexture1; \n"  +
-            "uniform float uProgress; \n"  +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
 
             "vec4 getColor(vec2 tc) { \n" +
             "    vec2 tl0 = vec2(0.0, -uProgress); \n" +
@@ -408,9 +408,9 @@ public class FFGLFourthNode extends FFGLNode {
     private String mFragmentShaderStringMoveLeftTopPro = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
-            "uniform sampler2D uTexture1; \n"  +
-            "uniform float uProgress; \n"  +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
 
             "vec4 getColor(vec2 tc) { \n" +
             "    vec2 tl0 = vec2(uProgress, uProgress); \n" +
@@ -446,9 +446,9 @@ public class FFGLFourthNode extends FFGLNode {
     private String mFragmentShaderStringMoveLeftBottomPro = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
-            "uniform sampler2D uTexture1; \n"  +
-            "uniform float uProgress; \n"  +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
 
             "vec4 getColor(vec2 tc) { \n" +
             "    vec2 tl0 = vec2(uProgress, -uProgress); \n" +
@@ -484,9 +484,9 @@ public class FFGLFourthNode extends FFGLNode {
     private String mFragmentShaderStringMoveRightTopPro = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
-            "uniform sampler2D uTexture1; \n"  +
-            "uniform float uProgress; \n"  +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
 
             "vec4 getColor(vec2 tc) { \n" +
             "    vec2 tl0 = vec2(-uProgress, uProgress); \n" +
@@ -523,9 +523,9 @@ public class FFGLFourthNode extends FFGLNode {
     private String mFragmentShaderStringMoveRightBottomPro = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
-            "uniform sampler2D uTexture1; \n"  +
-            "uniform float uProgress; \n"  +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
 
             "vec4 getColor(vec2 tc) { \n" +
             "    vec2 tl0 = vec2(-uProgress, -uProgress); \n" +
@@ -561,9 +561,9 @@ public class FFGLFourthNode extends FFGLNode {
     private String mFragmentShaderStringRotateCCWPro = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
-            "uniform sampler2D uTexture1; \n"  +
-            "uniform float uProgress; \n"  +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
             "uniform float uTexture0Width; \n" +
             "uniform float uTexture0Height; \n" +
 
@@ -607,16 +607,16 @@ public class FFGLFourthNode extends FFGLNode {
     private String mFragmentShaderStringRotateCWPro = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
-            "uniform sampler2D uTexture1; \n"  +
-            "uniform float uProgress; \n"  +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
             "uniform float uTexture0Width; \n" +
             "uniform float uTexture0Height; \n" +
 
             "vec4 getColor(vec2 tc_origin) { \n" +
             "    float theta = 6.2831853071796*uProgress;\n" +
             "    float c = cos(theta);\n" +
-			"    float s = sin(theta);\n" +
+            "    float s = sin(theta);\n" +
             "    vec2 tc_center_origin = 0.5*vec2(uTexture0Width, uTexture0Height); \n" +
             "    vec2 tc_rot_origin = mat2(c, -s, s, c)*(tc_origin - tc_center_origin) + tc_center_origin;\n" +
             "    vec2 tc_new = tc_rot_origin/vec2(uTexture0Width, uTexture0Height);\n" +
@@ -648,6 +648,191 @@ public class FFGLFourthNode extends FFGLNode {
             "    colorSum /= 102.0; \n" +
             "    gl_FragColor = clamp(colorSum, vec4(0.0), vec4(1.0)); \n" +
 //            "    gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0); \n" +
+            "} \n";
+
+    private String mFragmentShaderStringZoomOutCircle = " \n" +
+            "precision mediump float; \n" +
+            "varying vec2 vTexCoord; \n" +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
+            "uniform float uTexture0Width; \n" +
+            "uniform float uTexture0Height; \n" +
+            "void main() { \n" +
+            "    vec4 color = texture2D(uTexture0, vTexCoord);\n" +
+            "    vec2 tc_origin = vTexCoord*vec2(uTexture0Width, uTexture0Height); \n" +
+            "    vec2 tc_center_origin = 0.5*vec2(uTexture0Width, uTexture0Height); \n" +
+            "    float distance_origin = length(tc_origin - tc_center_origin); \n" +
+            "    float radius_max_origin = 0.5*length(vec2(uTexture0Width, uTexture0Height)); \n" +
+            "    float radius_origin = radius_max_origin*uProgress; \n" +
+            "    if (distance_origin <= radius_origin) { \n" +
+            "        vec2 tc = (vTexCoord-vec2(0.5))/(1.0+uProgress) + vec2(0.5);\n" +
+            "        if (tc.x >= 0.0 && tc.x <= 1.0 && tc.y >= 0.0 && tc.y <= 1.0) {\n" +
+            "            color = texture2D(uTexture1, tc);\n" +
+            "        }\n" +
+            "    }\n" +
+            "    gl_FragColor = color;\n" +
+            "} \n";
+
+    private String mFragmentShaderStringVibrate = " \n" +
+            "precision mediump float; \n" +
+            "varying vec2 vTexCoord; \n" +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
+            "uniform float uTexture0Width; \n" +
+            "uniform float uTexture0Height; \n" +
+
+            "void main() { \n" +
+            "    vec4 color = vec4(0.0); \n" +
+            "    float prg = 1.0 - abs(1.0 - uProgress*2.0); \n" +
+
+            "    vec2 tcFar = vec2(0.55, 0.45); \n" +
+            "    vec2 tcCenter = vec2(0.5); \n" +
+            "    vec2 tcCircleCenter = 0.5*(tcCenter+tcFar); \n" +
+            "    vec2 tcDelta = tcCenter - tcCircleCenter; \n" +
+            "    float alpha = atan(tcDelta.y, tcDelta.x); \n" +
+            "    float beta = alpha + 6.2831853071796*uProgress; \n" +
+            "    float c = cos(beta); \n" +
+            "    float s = sin(beta); \n" +
+            "    vec2 tcCenterNew = mat2(c, -s, s, c)*(tcCenter - tcCircleCenter) + tcCircleCenter; \n" +
+            "    vec2 tcTl = tcCenterNew - tcCenter; \n" +
+            "    vec2 tcNew = vTexCoord + tcTl; \n" +
+
+            "    float scale = 1.0 + 0.1*prg; \n" +
+            "    tcNew = (tcNew-tcCenterNew)/vec2(scale) + tcCenterNew; \n" +
+            "    if (0.0 <= tcNew.x && tcNew.x <= 1.0 && 0.0 <= tcNew.y && tcNew.y <= 1.0) { \n" +
+            "        vec4 color0 = texture2D(uTexture0, tcNew); \n" +
+            "        vec4 color1 = texture2D(uTexture1, tcNew); \n" +
+            "        color = mix(color0, color1, uProgress*uProgress*uProgress); \n" +
+            "    } else { \n" +
+            "        color = vec4(0.0); \n" +
+            "    } \n" +
+            "    gl_FragColor = color; \n" +
+            "} \n";
+
+    private String mFragmentShaderStringShake = " \n" +
+            "precision mediump float; \n" +
+            "varying vec2 vTexCoord; \n" +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
+            "uniform float uTexture0Width; \n" +
+            "uniform float uTexture0Height; \n" +
+
+            "void main() { \n" +
+            "    vec4 color = vec4(0.0); \n" +
+            "    vec2 tcNew = vTexCoord; \n" +
+            "    if (uProgress < 0.5) {; \n" +
+            "        float prg = 2.0*uProgress; \n" +
+            "        prg = prg*prg*prg; \n" +
+            "        vec2 tl = vec2(0.0, -1.0); \n" +
+            "        tcNew = vTexCoord - tl + tl*prg; \n" +
+            "    } else { \n" +
+            "        float prg = 8.0*(uProgress-0.5); \n" +
+            "        float alpha = 0.087266462608333; \n" +
+            "        float beta = alpha; \n" +
+            "        if (prg < 1.0) { \n" +
+            "            beta = 3.0*alpha*prg; \n" +
+            "        } else if (prg < 2.0) { \n" +
+            "            prg -= 1.0; \n" +
+            "            beta = mix(3.0*alpha, -2.0*alpha, prg); \n" +
+            "        } else if (prg < 3.0) { \n" +
+            "            prg -= 2.0; \n" +
+            "            beta = mix(-2.0*alpha, alpha, prg); \n" +
+            "        } else { \n" +
+            "            prg -= 3.0; \n" +
+            "            beta = mix(alpha, 0.0, prg); \n" +
+            "        } \n" +
+            "        float c = cos(beta); \n" +
+            "        float s = sin(beta); \n" +
+            "        vec2 tc_origin = vTexCoord*vec2(uTexture0Width, uTexture0Height); \n" +
+            "        vec2 tc_center_origin = 0.5*vec2(uTexture0Width, uTexture0Height); \n" +
+            "        vec2 tc_new_origin = mat2(c, -s, s, c)*(tc_origin-tc_center_origin) + tc_center_origin; \n" +
+            "        tcNew = tc_new_origin/vec2(uTexture0Width, uTexture0Height); \n" +
+            "    } \n" +
+            "    if (0.0 <= tcNew.x && tcNew.x <= 1.0 && 0.0 <= tcNew.y && tcNew.y <= 1.0) { \n" +
+            "        vec4 color0 = texture2D(uTexture0, tcNew); \n" +
+            "        vec4 color1 = texture2D(uTexture1, tcNew); \n" +
+            "        color = mix(color0, color1, uProgress*uProgress*uProgress); \n" +
+            "    } else { \n" +
+            "        color = vec4(0.0); \n" +
+            "    } \n" +
+            "    gl_FragColor = color; \n" +
+            "} \n";
+
+    private String mFragmentShaderStringRock = " \n" +
+            "precision mediump float; \n" +
+            "varying vec2 vTexCoord; \n" +
+            "uniform sampler2D uTexture0; \n" +
+            "uniform sampler2D uTexture1; \n" +
+            "uniform float uProgress; \n" +
+            "uniform float uTexture0Width; \n" +
+            "uniform float uTexture0Height; \n" +
+
+            "void main() { \n" +
+            "    vec4 color = vec4(0.0); \n" +
+            "    vec2 tc_origin = vTexCoord*vec2(uTexture0Width, uTexture0Height); \n" +
+            "    vec2 tc_tl_origin = vec2(0.0, 0.15)*vec2(uTexture0Width, uTexture0Height); \n" +
+            "    vec2 tc_new_origin = tc_origin; \n" +
+            "    if (uProgress < 0.5) {; \n" +
+            "        float prg = 2.0*uProgress; \n" +
+            "        vec2 tl_s_origin = vec2(0.0, 0.2)*vec2(uTexture0Width, uTexture0Height); \n" +
+            "        vec2 tl_e_origin = vec2(0.0, -0.1)*vec2(uTexture0Width, uTexture0Height); \n" +
+            "        tc_new_origin = tc_origin + mix(tl_s_origin, tl_e_origin, prg); \n" +
+            "    } else if (uProgress < 0.83) { \n" +
+            "        float prg = (uProgress-0.5)/0.33; \n" +
+            "        vec2 tl_s_origin = vec2(0.0, -0.1)*vec2(uTexture0Width, uTexture0Height); \n" +
+            "        vec2 tl_e_origin = vec2(0.0, 0.01)*vec2(uTexture0Width, uTexture0Height); \n" +
+            "        tc_new_origin = tc_origin + mix(tl_s_origin, tl_e_origin, prg); \n" +
+            "    } else { \n" +
+            "        float prg = (uProgress-0.83)/0.17; \n" +
+            "        vec2 tl_s_origin = vec2(0.0, 0.01)*vec2(uTexture0Width, uTexture0Height); \n" +
+            "        vec2 tl_e_origin = vec2(0.0, 0.0)*vec2(uTexture0Width, uTexture0Height); \n" +
+            "        tc_new_origin = tc_origin + mix(tl_s_origin, tl_e_origin, prg); \n" +
+            "    } \n" +
+            "    vec2 tc_new_center_origin = tc_new_origin*0.5; \n" +
+            "    if (uProgress < 0.25) {; \n" +
+            "        float prg = 4.0*uProgress; \n" +
+            "        float alpha = 0.087266462608333; \n" +
+            "        float beta = alpha*prg; \n" +
+            "        float c = cos(beta); \n" +
+            "        float s = sin(beta); \n" +
+            "        tc_new_origin = mat2(c, -s, s, c)*(tc_new_origin-tc_new_center_origin) + tc_new_center_origin; \n" +
+            "    } else if (uProgress < 0.75) { \n" +
+            "        float prg = 2.0*(uProgress-0.25); \n" +
+            "        float alpha = 0.087266462608333; \n" +
+            "        float beta = mix(alpha, -alpha, prg); \n" +
+            "        float c = cos(beta); \n" +
+            "        float s = sin(beta); \n" +
+            "        tc_new_origin = mat2(c, -s, s, c)*(tc_new_origin-tc_new_center_origin) + tc_new_center_origin; \n" +
+            "    } else { \n" +
+            "        float prg = 4.0*(uProgress-0.75); \n" +
+            "        float alpha = 0.087266462608333; \n" +
+            "        float beta = mix(-alpha, 0.0, prg); \n" +
+            "        float c = cos(beta); \n" +
+            "        float s = sin(beta); \n" +
+            "        tc_new_origin = mat2(c, -s, s, c)*(tc_new_origin-tc_new_center_origin) + tc_new_center_origin; \n" +
+            "    } \n" +
+            "    vec2 tcNew = tc_new_origin/vec2(uTexture0Width, uTexture0Height); \n" +
+            "    if (0.0 <= tcNew.x && tcNew.x <= 1.0 && 0.0 <= tcNew.y && tcNew.y <= 1.0) { \n" +
+            "        vec4 color0 = texture2D(uTexture0, tcNew); \n" +
+            "        vec4 color1 = texture2D(uTexture1, tcNew); \n" +
+            "        color = mix(color0, color1, uProgress*uProgress*uProgress); \n" +
+            "    } else { \n" +
+            "        color = vec4(0.0); \n" +
+            "    } \n" +
+            "    gl_FragColor = color; \n" +
+            "} \n";
+
+    private String mFragmentShaderStringWaterRripple = " \n" +
+            "precision mediump float; \n" +
+            "varying vec2 vTexCoord; \n" +
+            "uniform sampler2D uTexture0; \n"  +
+            "void main() { \n" +
+            "    vec4 color = texture2D(uTexture0, vTexCoord); \n" +
+            "    vec3 invert = vec3(1.0) - color.rgb;\n" +
+            "    gl_FragColor = vec4(invert, color.a);\n" +
             "} \n";
 
     private String mVertexShaderString1 = " \n" +
@@ -690,9 +875,14 @@ public class FFGLFourthNode extends FFGLNode {
 //        mProgress += 0.01;
 //        if (mProgress > 1.0f) mProgress = 1.0f;
 //        else if (mProgress < 0.0f) mProgress = 0.0f;
-        dt += 0.01f;
-        mProgress = (float) Math.abs(Math.sin(dt));
-//        mProgress = 14.0f/15.0f;
+
+//        dt += 0.06f;
+//        mProgress = (float) Math.abs(Math.sin(dt));
+
+//        mProgress += 0.01;
+//        mProgress = mProgress-(int)mProgress;
+
+        mProgress = 14.0f/15.0f;
 //        Log.e("shiyang", "shiyang progress="+mProgress);
 
     }
@@ -732,15 +922,13 @@ public class FFGLFourthNode extends FFGLNode {
         GLES20.glDisableVertexAttribArray(mTextureCoordinatesHandle);
         GLES20.glUseProgram(0);
 
-//        ByteBuffer buf = ByteBuffer.allocateDirect(mTexture0OriginalWidth*mTexture0OriginalHeight*4);
-//        buf.order(ByteOrder.nativeOrder());
-        mGLReadPixelBuffer = ByteBuffer.allocateDirect(mTexture0OriginalWidth*mTexture0OriginalHeight*4);
-        mGLReadPixelBuffer.order(ByteOrder.nativeOrder());
-        GLES20.glReadPixels(0, 0, mTexture0OriginalWidth, mTexture0OriginalHeight, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, mGLReadPixelBuffer);
-
-        byte[] bytes = new byte[mGLReadPixelBuffer.capacity()];
-        mGLReadPixelBuffer.get(bytes, 0, bytes.length);
-        mBitmapDump = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//        mGLReadPixelBuffer = ByteBuffer.allocateDirect(mTexture0OriginalWidth*mTexture0OriginalHeight*4);
+//        mGLReadPixelBuffer.order(ByteOrder.nativeOrder());
+//        GLES20.glReadPixels(0, 0, mTexture0OriginalWidth, mTexture0OriginalHeight, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, mGLReadPixelBuffer);
+//
+//        byte[] bytes = new byte[mGLReadPixelBuffer.capacity()];
+//        mGLReadPixelBuffer.get(bytes, 0, bytes.length);
+//        mBitmapDump = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 
     @Override
@@ -761,11 +949,11 @@ public class FFGLFourthNode extends FFGLNode {
 
     private void initTexture() {
         mTexture0ID = FFGLTextureUtils.initTexture();
-        int rId0 = R.raw.a010;
+        int rId0 = R.raw.a013s;
         updateTexture(rId0, mTexture0ID);
 
         mTexture1ID = FFGLTextureUtils.initTexture();
-        int rId1 = R.raw.a011;
+        int rId1 = R.raw.a014;
         updateTexture(rId1, mTexture1ID);
 
         mTexture2ID = FFGLTextureUtils.initTexture();
@@ -814,7 +1002,12 @@ public class FFGLFourthNode extends FFGLNode {
         String fs9 = mFragmentShaderStringMoveRightBottomPro;
         String fs10 = mFragmentShaderStringRotateCCWPro;
         String fs11 = mFragmentShaderStringRotateCWPro;
-        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString, fs11);
+        String fs12 = mFragmentShaderStringZoomOutCircle;
+        String fs13 = mFragmentShaderStringVibrate;
+        String fs14 = mFragmentShaderStringShake;
+        String fs15 = mFragmentShaderStringRock;
+        String fs16 = mFragmentShaderStringWaterRripple;
+        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString, fs13);
 //        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString1, mFragmentShaderString1);
     }
 
