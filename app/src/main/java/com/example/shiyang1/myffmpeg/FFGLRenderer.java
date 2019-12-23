@@ -6,6 +6,7 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
 
+import com.example.shiyang1.myffmpeg.manager.NodeManager;
 import com.example.shiyang1.myffmpeg.node.FFGLFirstNode;
 import com.example.shiyang1.myffmpeg.node.FFGLFourthNode;
 import com.example.shiyang1.myffmpeg.node.FFGLSecondNode;
@@ -20,6 +21,8 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
     private FFGLThirdNode mThirdNode;
     private FFGLFourthNode mFourthNode;
 //    private FFGLYUV2RGBANode mYuvNode;
+
+    private NodeManager mNodeManager;
 
     private Context mContext;
 
@@ -43,21 +46,25 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
     public void onDrawFrame(GL10 gl) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-        if (null != mFirstNode) {
-            mFirstNode.update();
-            mFirstNode.render();
-        }
-        if (null != mSecondNode) {
-            mSecondNode.update();
-            mSecondNode.render();
-        }
-        if (null != mThirdNode) {
-            mThirdNode.update();
-            mThirdNode.render();
-        }
-        if (null != mFourthNode) {
-            mFourthNode.update();
-            mFourthNode.render();
+//        if (null != mFirstNode) {
+//            mFirstNode.update();
+//            mFirstNode.render();
+//        }
+//        if (null != mSecondNode) {
+//            mSecondNode.update();
+//            mSecondNode.render();
+//        }
+//        if (null != mThirdNode) {
+//            mThirdNode.update();
+//            mThirdNode.render();
+//        }
+//        if (null != mFourthNode) {
+//            mFourthNode.update();
+//            mFourthNode.render();
+//        }
+        if (null != mNodeManager) {
+            mNodeManager.update();
+            mNodeManager.render();
         }
     }
 
@@ -70,24 +77,30 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
 //        mThirdNode.init();
         mFourthNode = new FFGLFourthNode(mContext);
         mFourthNode.init();
+        mNodeManager = new NodeManager();
+        mNodeManager.init();
+        mNodeManager.addFFGLNode(mFourthNode);
     }
 
     public void destroy() {
-        if (null != mFirstNode) {
-            mFirstNode.destroy();
-            mFirstNode = null;
+        if (null != mNodeManager) {
+            mNodeManager.destroy();
         }
-        if (null != mSecondNode) {
-            mSecondNode.destroy();
-            mSecondNode = null;
-        }
-        if (null != mThirdNode) {
-            mThirdNode.destroy();
-            mThirdNode = null;
-        }
-        if (null != mFourthNode) {
-            mFourthNode.destroy();
-            mFourthNode = null;
-        }
+//        if (null != mFirstNode) {
+//            mFirstNode.destroy();
+//            mFirstNode = null;
+//        }
+//        if (null != mSecondNode) {
+//            mSecondNode.destroy();
+//            mSecondNode = null;
+//        }
+//        if (null != mThirdNode) {
+//            mThirdNode.destroy();
+//            mThirdNode = null;
+//        }
+//        if (null != mFourthNode) {
+//            mFourthNode.destroy();
+//            mFourthNode = null;
+//        }
     }
 }

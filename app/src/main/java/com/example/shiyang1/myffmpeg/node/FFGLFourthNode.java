@@ -879,10 +879,10 @@ public class FFGLFourthNode extends FFGLNode {
 //        dt += 0.06f;
 //        mProgress = (float) Math.abs(Math.sin(dt));
 
-//        mProgress += 0.01;
-//        mProgress = mProgress-(int)mProgress;
+        mProgress += 0.01;
+        mProgress = mProgress-(int)mProgress;
 
-        mProgress = 14.0f/15.0f;
+//        mProgress = 14.0f/15.0f;
 //        Log.e("shiyang", "shiyang progress="+mProgress);
 
     }
