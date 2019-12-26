@@ -908,18 +908,20 @@ public class FFGLFifthNode extends FFGLNode {
             "    float newH_origin = newW_origin*uTexture1Height/uTexture1Width; \n" +
             "    vec2 scale = vec2(newW_origin/uTexture0Width, newH_origin/uTexture0Height); \n" +
             "    vec2 newCenter0_origin= vec2(newW_origin*0.5, 0.5*newH_origin); \n" +
-            "    vec2 newCenter1_origin= vec2(1.0-newW_origin*0.5, 1.0-0.5*newH_origin); \n" +
+            "    vec2 newCenter1_origin= vec2(uTexture0Width-newW_origin*0.5, uTexture0Height-0.5*newH_origin); \n" +
             "    vec2 newCenter0 = newCenter0_origin/vec2(uTexture0Width, uTexture0Height); \n" +
             "    vec2 newCenter1 = newCenter1_origin/vec2(uTexture0Width, uTexture0Height); \n" +
+            "    vec2 tl0 = 0.5 - newCenter0; \n" +
+            "    vec2 tl1 = 0.5 - newCenter1; \n" +
             "    vec2 newCenter = mix(newCenter0, newCenter1, uProgress); \n" +
-            "    vec2 tc_charactor = vTexCoord+newCenter; \n"  +
-            "    tc_charactor = (tc_charactor-vec2(0.5))/scale + vec2(0.5); \n"  +
+            "    vec2 tl = mix(tl0, tl1, uProgress); \n" +
+            "    vec2 tc_charactor = vTexCoord; \n"  +
+            "    tc_charactor = vTexCoord+tl; \n"  +
+            "    tc_charactor = (tc_charactor-0.5)/scale + 0.5; \n"  +
             "    if (0.0 <= tc_charactor.x && tc_charactor.x <= 1.0 && 0.0 <= tc_charactor.y && tc_charactor.y <= 1.0) { \n" +
             "        textureColor = texture2D(uTexture1, tc_charactor); \n"  +
             "    }\n " +
-
             "    gl_FragColor = textureColor; \n"  +
-
             "} \n";
 
 
