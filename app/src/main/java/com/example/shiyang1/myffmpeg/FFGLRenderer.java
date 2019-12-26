@@ -7,6 +7,7 @@ import android.opengl.GLSurfaceView;
 import android.util.Log;
 
 import com.example.shiyang1.myffmpeg.manager.NodeManager;
+import com.example.shiyang1.myffmpeg.node.FFGLFifthNode;
 import com.example.shiyang1.myffmpeg.node.FFGLFirstNode;
 import com.example.shiyang1.myffmpeg.node.FFGLFourthNode;
 import com.example.shiyang1.myffmpeg.node.FFGLSecondNode;
@@ -20,6 +21,7 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
     private FFGLSecondNode mSecondNode;
     private FFGLThirdNode mThirdNode;
     private FFGLFourthNode mFourthNode;
+    private FFGLFifthNode mFifthNode;
 //    private FFGLYUV2RGBANode mYuvNode;
 
     private NodeManager mNodeManager;
@@ -75,11 +77,14 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
 //        mSecondNode.init();
 //        mThirdNode = new FFGLThirdNode(mContext);
 //        mThirdNode.init();
-        mFourthNode = new FFGLFourthNode(mContext);
-        mFourthNode.init();
+//        mFourthNode = new FFGLFourthNode(mContext);
+//        mFourthNode.init();
+        mFifthNode = new FFGLFifthNode(mContext);
+        mFifthNode.init();
         mNodeManager = new NodeManager();
         mNodeManager.init();
-        mNodeManager.addFFGLNode(mFourthNode);
+//        mNodeManager.addFFGLNode(mFourthNode);
+        mNodeManager.addFFGLNode(mFifthNode);
     }
 
     public void destroy() {

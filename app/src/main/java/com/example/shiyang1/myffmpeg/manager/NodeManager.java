@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NodeManager {
-    List<FFGLNode> mFFGLNodeList;
+    private List<FFGLNode> mFFGLNodeList;
 
     public void init() {
         if (null == mFFGLNodeList)
