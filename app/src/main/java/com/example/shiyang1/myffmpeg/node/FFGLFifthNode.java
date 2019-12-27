@@ -846,13 +846,15 @@ public class FFGLFifthNode extends FFGLNode {
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
             "uniform sampler2D uTexture0; \n"  +
+            "uniform sampler2D uTexture1; \n"  +
             "uniform float uProgress; \n" +
             "uniform float uTexture0Width; \n" +
             "uniform float uTexture0Height; \n" +
             "float pi = 3.1415926535898; \n" +
 
             "void main() { \n" +
-            "    vec4 color = texture2D(uTexture0, vTexCoord); \n" +
+            "    float prg = uProgress; \n" +
+//            "    if (uProgress > 0.5) prg = (1.0 - uProgress)*2.0; \n" +
             "    vec2 tc_origin = vTexCoord*vec2(uTexture0Width, uTexture0Height); \n" +
             "    vec2 tc_center_origin = 0.5*vec2(uTexture0Width, uTexture0Height); \n" +
             "    vec2 tc_delta_origin = tc_origin - tc_center_origin; \n" +
@@ -860,15 +862,18 @@ public class FFGLFifthNode extends FFGLNode {
             "    float distance_longest_origin = length(tc_center_origin); \n" +
             "    float alpha = atan(tc_delta_origin.y, tc_delta_origin.x); \n" +
             "    float percentage = distance_origin/distance_longest_origin; \n" +
-            "    float amp = sin(percentage*20.0*pi-uProgress*pi)*(1.0-percentage); \n" +
+            "    float amp0 = sin(percentage*15.0*pi-prg*pi)*(1.0-percentage)*(1.0-percentage); \n" +
+            "    float amp1 = cos(percentage*15.0*pi-prg*pi)*(1.0-percentage)*(1.0-percentage); \n" +
 //            "    float beta = alpha*amp; \n" +
-            "    vec2 tc_new_origin = tc_origin + amp*tc_delta_origin; \n" +
+            "    vec2 tc_new_origin = tc_origin + prg*(amp0+amp1)*tc_delta_origin; \n" +
             "    vec2 tc_new = tc_new_origin/vec2(uTexture0Width, uTexture0Height); \n" +
 //            "    vec4 black = vec4(0.0, 0.0, 0.0, 1.0); \n" +
 //            "    vec4 white = vec4(1.0, 1.0, 1.0, 1.0); \n" +
 //            "    vec4 mixColor = mix(black, white, (amp+1.0)*0.5); \n" +
 //            "    gl_FragColor = mixColor;\n" +
-            "    gl_FragColor = texture2D(uTexture0, tc_new); \n" +
+            "    vec4 color0 = texture2D(uTexture0, tc_new); \n" +
+            "    vec4 color1 = texture2D(uTexture1, vTexCoord); \n" +
+            "    gl_FragColor = mix(color0, color1, uProgress*uProgress*uProgress); \n" +
 
             "} \n";
 
@@ -986,13 +991,13 @@ public class FFGLFifthNode extends FFGLNode {
 //        if (mProgress > 1.0f) mProgress = 1.0f;
 //        else if (mProgress < 0.0f) mProgress = 0.0f;
 
-//        dt += 0.06f;
+//        dt += 0.01f;
 //        mProgress = (float) Math.abs(Math.sin(dt));
 
-        mProgress += 0.01;
-//        mProgress = mProgress-(int)mProgress;
+        mProgress += 0.005;
+        mProgress = mProgress-(int)mProgress;
 
-//        mProgress = 14.0f/15.0f;
+//        mProgress = 15.0f/15.0f;
 //        Log.e("shiyang", "shiyang progress="+mProgress);
 
         mIntensity += 0.01;
@@ -1073,7 +1078,7 @@ public class FFGLFifthNode extends FFGLNode {
     private void initTexture() {
         mTextureInfo0 = new TextureInfo();
         mTextureInfo0.mTextureId = FFGLTextureUtils.initTexture();
-        int rId0 = R.raw.a013s;
+        int rId0 = R.raw.a003;
         updateTexture(rId0, mTextureInfo0);
 
         Log.e("shiyang", "shiyang texid="+mTextureInfo0.mTextureId
@@ -1082,7 +1087,7 @@ public class FFGLFifthNode extends FFGLNode {
 
         mTextureInfo1 = new TextureInfo();
         mTextureInfo1.mTextureId = FFGLTextureUtils.initTexture();
-        int rId1 = R.raw.c000;
+        int rId1 = R.raw.a004;
         updateTexture(rId1, mTextureInfo1);
 
         Log.e("shiyang", "shiyang texid="+mTextureInfo1.mTextureId
