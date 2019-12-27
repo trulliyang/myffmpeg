@@ -48,22 +48,7 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
     public void onDrawFrame(GL10 gl) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-//        if (null != mFirstNode) {
-//            mFirstNode.update();
-//            mFirstNode.render();
-//        }
-//        if (null != mSecondNode) {
-//            mSecondNode.update();
-//            mSecondNode.render();
-//        }
-//        if (null != mThirdNode) {
-//            mThirdNode.update();
-//            mThirdNode.render();
-//        }
-//        if (null != mFourthNode) {
-//            mFourthNode.update();
-//            mFourthNode.render();
-//        }
+
         if (null != mNodeManager) {
             mNodeManager.update();
             mNodeManager.render();
@@ -91,21 +76,5 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
         if (null != mNodeManager) {
             mNodeManager.destroy();
         }
-//        if (null != mFirstNode) {
-//            mFirstNode.destroy();
-//            mFirstNode = null;
-//        }
-//        if (null != mSecondNode) {
-//            mSecondNode.destroy();
-//            mSecondNode = null;
-//        }
-//        if (null != mThirdNode) {
-//            mThirdNode.destroy();
-//            mThirdNode = null;
-//        }
-//        if (null != mFourthNode) {
-//            mFourthNode.destroy();
-//            mFourthNode = null;
-//        }
     }
 }

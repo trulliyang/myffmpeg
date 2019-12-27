@@ -846,10 +846,30 @@ public class FFGLFifthNode extends FFGLNode {
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
             "uniform sampler2D uTexture0; \n"  +
+            "uniform float uProgress; \n" +
+            "uniform float uTexture0Width; \n" +
+            "uniform float uTexture0Height; \n" +
+            "float pi = 3.1415926535898; \n" +
+
             "void main() { \n" +
             "    vec4 color = texture2D(uTexture0, vTexCoord); \n" +
-            "    vec3 invert = vec3(1.0) - color.rgb;\n" +
-            "    gl_FragColor = vec4(invert, color.a);\n" +
+            "    vec2 tc_origin = vTexCoord*vec2(uTexture0Width, uTexture0Height); \n" +
+            "    vec2 tc_center_origin = 0.5*vec2(uTexture0Width, uTexture0Height); \n" +
+            "    vec2 tc_delta_origin = tc_origin - tc_center_origin; \n" +
+            "    float distance_origin = length(tc_delta_origin); \n" +
+            "    float distance_longest_origin = length(tc_center_origin); \n" +
+            "    float alpha = atan(tc_delta_origin.y, tc_delta_origin.x); \n" +
+            "    float percentage = distance_origin/distance_longest_origin; \n" +
+            "    float amp = sin(percentage*20.0*pi-uProgress*pi)*(1.0-percentage); \n" +
+//            "    float beta = alpha*amp; \n" +
+            "    vec2 tc_new_origin = tc_origin + amp*tc_delta_origin; \n" +
+            "    vec2 tc_new = tc_new_origin/vec2(uTexture0Width, uTexture0Height); \n" +
+//            "    vec4 black = vec4(0.0, 0.0, 0.0, 1.0); \n" +
+//            "    vec4 white = vec4(1.0, 1.0, 1.0, 1.0); \n" +
+//            "    vec4 mixColor = mix(black, white, (amp+1.0)*0.5); \n" +
+//            "    gl_FragColor = mixColor;\n" +
+            "    gl_FragColor = texture2D(uTexture0, tc_new); \n" +
+
             "} \n";
 
     private String mFragmentShaderStringLUT = " \n" +
@@ -970,7 +990,7 @@ public class FFGLFifthNode extends FFGLNode {
 //        mProgress = (float) Math.abs(Math.sin(dt));
 
         mProgress += 0.01;
-        mProgress = mProgress-(int)mProgress;
+//        mProgress = mProgress-(int)mProgress;
 
 //        mProgress = 14.0f/15.0f;
 //        Log.e("shiyang", "shiyang progress="+mProgress);
@@ -1030,17 +1050,23 @@ public class FFGLFifthNode extends FFGLNode {
 
     @Override
     public void destroy() {
-        if (mTextureInfo0.mTextureId > 0) {
-            int[] tex = new int[1];
-            tex[0] = mTextureInfo0.mTextureId;
-            GLES20.glDeleteTextures(1, tex, 0);
-            mTextureInfo0.mTextureId = -200;
+        if (null != mTextureInfo0) {
+            if (mTextureInfo0.mTextureId > 0) {
+                int[] tex = new int[1];
+                tex[0] = mTextureInfo0.mTextureId;
+                GLES20.glDeleteTextures(1, tex, 0);
+                mTextureInfo0.mTextureId = -200;
+            }
+            mTextureInfo0 = null;
         }
-        if (mTextureInfo1.mTextureId > 0) {
-            int[] tex = new int[1];
-            tex[0] = mTextureInfo1.mTextureId;
-            GLES20.glDeleteTextures(1, tex, 0);
-            mTextureInfo1.mTextureId = -200;
+        if (null != mTextureInfo1) {
+            if (mTextureInfo1.mTextureId > 0) {
+                int[] tex = new int[1];
+                tex[0] = mTextureInfo1.mTextureId;
+                GLES20.glDeleteTextures(1, tex, 0);
+                mTextureInfo1.mTextureId = -200;
+            }
+            mTextureInfo1 = null;
         }
     }
 
@@ -1050,8 +1076,7 @@ public class FFGLFifthNode extends FFGLNode {
         int rId0 = R.raw.a013s;
         updateTexture(rId0, mTextureInfo0);
 
-        Log.e("shiyang",
-                "shiyang texid="+mTextureInfo0.mTextureId
+        Log.e("shiyang", "shiyang texid="+mTextureInfo0.mTextureId
                         +",w="+mTextureInfo0.mTextureWidth
                         +",h="+mTextureInfo0.mTextureHeight);
 
@@ -1060,8 +1085,7 @@ public class FFGLFifthNode extends FFGLNode {
         int rId1 = R.raw.c000;
         updateTexture(rId1, mTextureInfo1);
 
-        Log.e("shiyang",
-                "shiyang texid="+mTextureInfo1.mTextureId
+        Log.e("shiyang", "shiyang texid="+mTextureInfo1.mTextureId
                         +",w="+mTextureInfo1.mTextureWidth
                         +",h="+mTextureInfo1.mTextureHeight);
 
@@ -1118,7 +1142,7 @@ public class FFGLFifthNode extends FFGLNode {
         String fs16 = mFragmentShaderStringWaterRripple;
         String fs17 = mFragmentShaderStringLUT;
         String fs18 = mFragmentShaderStringCharactor;
-        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString, fs18);
+        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString, fs16);
 //        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString1, mFragmentShaderString1);
     }
 
