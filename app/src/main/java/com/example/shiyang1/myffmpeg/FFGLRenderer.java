@@ -11,6 +11,8 @@ import com.example.shiyang1.myffmpeg.node.FFGLFifthNode;
 import com.example.shiyang1.myffmpeg.node.FFGLFirstNode;
 import com.example.shiyang1.myffmpeg.node.FFGLFourthNode;
 import com.example.shiyang1.myffmpeg.node.FFGLSecondNode;
+import com.example.shiyang1.myffmpeg.node.FFGLSeventhNode;
+import com.example.shiyang1.myffmpeg.node.FFGLSixthNode;
 import com.example.shiyang1.myffmpeg.node.FFGLThirdNode;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -22,9 +24,14 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
     private FFGLThirdNode mThirdNode;
     private FFGLFourthNode mFourthNode;
     private FFGLFifthNode mFifthNode;
+    private FFGLSixthNode mSixthNode;
+    private FFGLSeventhNode mSeventhNode;
 //    private FFGLYUV2RGBANode mYuvNode;
 
     private NodeManager mNodeManager;
+
+    private int mBackgroudWidth = 720;
+    private int mBackgroundHeight = 1280;
 
     private Context mContext;
 
@@ -40,7 +47,11 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         Log.e("shiyang", "shiyang vp (w,h)="+width+","+height);
-        GLES20.glViewport(0, 0, 960, 720);
+        int x = 0;
+        int y = 0;
+        int w = mBackgroudWidth;
+        int h = mBackgroundHeight;
+        GLES20.glViewport(x, y, w, h);
         GLES20.glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
     }
 
@@ -55,21 +66,43 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
         }
     }
 
-    private void init() {
-//        mFirstNode = new FFGLFirstNode(mContext);
-//        mFirstNode.init();
-//        mSecondNode = new FFGLSecondNode(mContext);
-//        mSecondNode.init();
-//        mThirdNode = new FFGLThirdNode(mContext);
-//        mThirdNode.init();
-//        mFourthNode = new FFGLFourthNode(mContext);
-//        mFourthNode.init();
+    private void initManger() {
+        if (null == mNodeManager) {
+            mNodeManager = new NodeManager();
+            mNodeManager.init();
+        }
+    }
+
+    private void initNode() {
+        mFirstNode = new FFGLFirstNode(mContext);
+        mFirstNode.init();
+        mSecondNode = new FFGLSecondNode(mContext);
+        mSecondNode.init();
+        mThirdNode = new FFGLThirdNode(mContext);
+        mThirdNode.init();
+        mFourthNode = new FFGLFourthNode(mContext);
+        mFourthNode.init();
         mFifthNode = new FFGLFifthNode(mContext);
         mFifthNode.init();
-        mNodeManager = new NodeManager();
-        mNodeManager.init();
+        mSixthNode = new FFGLSixthNode(mContext);
+        mSixthNode.init();
+        mSeventhNode = new FFGLSeventhNode(mContext);
+        mSeventhNode.init();
+
+    }
+
+    private void addNode() {
+        mNodeManager.addFFGLNode(mFirstNode);
 //        mNodeManager.addFFGLNode(mFourthNode);
         mNodeManager.addFFGLNode(mFifthNode);
+        mNodeManager.addFFGLNode(mSixthNode);
+        mNodeManager.addFFGLNode(mSeventhNode);
+    }
+
+    private void init() {
+        initManger();
+        initNode();
+        addNode();
     }
 
     public void destroy() {

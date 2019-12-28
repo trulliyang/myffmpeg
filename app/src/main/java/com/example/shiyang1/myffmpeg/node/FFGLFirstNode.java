@@ -9,6 +9,7 @@ import android.opengl.GLES20;
 import android.opengl.GLUtils;
 
 import com.example.shiyang1.myffmpeg.R;
+import com.example.shiyang1.myffmpeg.utils.FFGLFramebufferObjectUtils;
 import com.example.shiyang1.myffmpeg.utils.FFGLShaderUtils;
 import com.example.shiyang1.myffmpeg.utils.FFGLTextureUtils;
 
@@ -21,6 +22,8 @@ import java.nio.ShortBuffer;
 public class FFGLFirstNode extends FFGLNode {
 
     private Context mContext;
+
+    private int mFramebufferObjectID = -111;
 
     private int mShaderProgramID = -111;
     private int mTexture0ID = -200;
@@ -60,7 +63,7 @@ public class FFGLFirstNode extends FFGLNode {
     private String mFragmentShaderString = " \n" +
             "precision mediump float; \n" +
             "void main() { \n" +
-            "    gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0); \n" +
+            "    gl_FragColor = vec4(0.1, 0.1, 0.1, 1.0); \n" +
             "} \n";
 
     private String mVertexShaderString1 = " \n" +
@@ -142,14 +145,19 @@ public class FFGLFirstNode extends FFGLNode {
         }
     }
 
+    private void initFramebufferObject() {
+        mFramebufferObjectID = FFGLFramebufferObjectUtils.initFramebufferObject();
+//        fboBindTexture();
+    }
+
     private void initTexture() {
         mTexture0ID = FFGLTextureUtils.initTexture();
         updateTexture();
     }
 
     private void initShader() {
-//        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString, mFragmentShaderString);
-        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString1, mFragmentShaderString1);
+        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString, mFragmentShaderString);
+//        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString1, mFragmentShaderString1);
     }
 
     private void initAttribute(){

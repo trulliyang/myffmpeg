@@ -17,7 +17,7 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-public class FFGLFifthNode extends FFGLNode {
+public class FFGLSixthNode extends FFGLNode {
     class TextureInfo {
         int mTextureId;
         int mTextureWidth;
@@ -981,7 +981,7 @@ public class FFGLFifthNode extends FFGLNode {
             "    gl_FragColor = vec4(invert, color.a);\n" +
             "} \n";
 
-    public FFGLFifthNode(Context context) {
+    public FFGLSixthNode(Context context) {
         mContext = context;
     }
 
@@ -1092,7 +1092,7 @@ public class FFGLFifthNode extends FFGLNode {
     private void initTexture() {
         mTextureInfo0 = new TextureInfo();
         mTextureInfo0.mTextureId = FFGLTextureUtils.initTexture();
-        int rId0 = R.raw.a014;
+        int rId0 = R.raw.frame5;
         updateTexture(rId0, mTextureInfo0);
 
         Log.e("shiyang", "shiyang texid="+mTextureInfo0.mTextureId
@@ -1135,7 +1135,7 @@ public class FFGLFifthNode extends FFGLNode {
     }
 
     private void initShader() {
-//        String fs = mFragmentShaderStringFadeInOut;
+        String fs = mFragmentShaderStringFadeInOut;
 //        fs = mFragmentShaderStringZoomIn;
 //        fs = mFragmentShaderStringZoomOut;
 //        fs = mFragmentShaderStringMoveLeft;
