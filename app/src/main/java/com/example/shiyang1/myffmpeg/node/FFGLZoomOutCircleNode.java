@@ -17,7 +17,7 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-public class FFGLVibrateNode extends FFGLNode {
+public class FFGLZoomOutCircleNode extends FFGLNode {
     class TextureInfo {
         int mTextureId;
         int mTextureWidth;
@@ -726,7 +726,7 @@ public class FFGLVibrateNode extends FFGLNode {
             "    float s = sin(beta); \n" +
             "    vec2 tcCenterNew = mat2(c, -s, s, c)*(tcCenter - tcCircleCenter) + tcCircleCenter; \n" +
             "    vec2 tcTl = tcCenterNew - tcCenter; \n" +
-            "    vec2 tcNew = vTexCoord + tcTl*prg; \n" +
+            "    vec2 tcNew = vTexCoord + tcTl; \n" +
 
             "    float scale = 1.0 + 0.1*prg; \n" +
             "    tcNew = (tcNew-tcCenterNew)/vec2(scale) + tcCenterNew; \n" +
@@ -981,7 +981,7 @@ public class FFGLVibrateNode extends FFGLNode {
             "    gl_FragColor = vec4(invert, color.a);\n" +
             "} \n";
 
-    public FFGLVibrateNode(Context context) {
+    public FFGLZoomOutCircleNode(Context context) {
         mContext = context;
     }
 
@@ -1096,7 +1096,7 @@ public class FFGLVibrateNode extends FFGLNode {
     private void initTexture() {
         mTextureInfo0 = new TextureInfo();
         mTextureInfo0.mTextureId = FFGLTextureUtils.initTexture();
-        int rId0 = R.raw.rp4;
+        int rId0 = R.raw.rp1;
         updateTexture(rId0, mTextureInfo0);
 
         Log.e("shiyang", "shiyang texid="+mTextureInfo0.mTextureId
@@ -1105,7 +1105,7 @@ public class FFGLVibrateNode extends FFGLNode {
 
         mTextureInfo1 = new TextureInfo();
         mTextureInfo1.mTextureId = FFGLTextureUtils.initTexture();
-        int rId1 = R.raw.rp5;
+        int rId1 = R.raw.rp2;
         updateTexture(rId1, mTextureInfo1);
 
         Log.e("shiyang", "shiyang texid="+mTextureInfo1.mTextureId
@@ -1147,16 +1147,16 @@ public class FFGLVibrateNode extends FFGLNode {
 //        fs = mFragmentShaderStringMoveUp;
 //        fs = mFragmentShaderStringMoveDown;
         String fsm1 = mFragmentShaderStringNo;
-        String fs00 = mFragmentShaderStringZoomInPro;
-        String fs01 = mFragmentShaderStringZoomOutPro;
-        String fs02 = mFragmentShaderStringMoveLeftPro;
-        String fs03 = mFragmentShaderStringMoveRightPro;
-        String fs04 = mFragmentShaderStringMoveTopPro;
-        String fs05 = mFragmentShaderStringMoveBottomPro;
-        String fs06 = mFragmentShaderStringMoveLeftTopPro;
-        String fs07 = mFragmentShaderStringMoveLeftBottomPro;
-        String fs08 = mFragmentShaderStringMoveRightTopPro;
-        String fs09 = mFragmentShaderStringMoveRightBottomPro;
+        String fs0 = mFragmentShaderStringZoomInPro;
+        String fs1 = mFragmentShaderStringZoomOutPro;
+        String fs2 = mFragmentShaderStringMoveLeftPro;
+        String fs3 = mFragmentShaderStringMoveRightPro;
+        String fs4 = mFragmentShaderStringMoveTopPro;
+        String fs5 = mFragmentShaderStringMoveBottomPro;
+        String fs6 = mFragmentShaderStringMoveLeftTopPro;
+        String fs7 = mFragmentShaderStringMoveLeftBottomPro;
+        String fs8 = mFragmentShaderStringMoveRightTopPro;
+        String fs9 = mFragmentShaderStringMoveRightBottomPro;
         String fs10 = mFragmentShaderStringRotateCCWPro;
         String fs11 = mFragmentShaderStringRotateCWPro;
         String fs12 = mFragmentShaderStringZoomOutCircle;
@@ -1166,7 +1166,7 @@ public class FFGLVibrateNode extends FFGLNode {
         String fs16 = mFragmentShaderStringWaterRripple;
         String fs17 = mFragmentShaderStringLUT;
         String fs18 = mFragmentShaderStringCharactor;
-        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString, fs13);
+        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString, fs12);
 //        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString1, mFragmentShaderString1);
     }
 

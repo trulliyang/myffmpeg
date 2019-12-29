@@ -44,7 +44,6 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
     private FFGLEighthNode mEighthNode;
     private FFGLNinthNode mNinthNode;
 
-
     private FFGLBackgroundNode mBackgroundNode;
     private FFGLFrameNode mFrameNode;
     private FFGLWatermarkNode mWatermarkNode;
@@ -90,7 +89,7 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
         GLES20.glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
     }
 
-    void doRender2() {
+    void draw2() {
         float dt = 0.0f;
         if (null != mBackgroundNode) {
             mBackgroundNode.update(dt);
@@ -186,7 +185,7 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
         if (true) {
-            doRender2();
+            draw2();
         } else {
             if (null != mNodeManager) {
                 float dt = mProgress;

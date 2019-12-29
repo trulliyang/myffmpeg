@@ -6,9 +6,11 @@ import com.example.shiyang1.myffmpeg.node.FFGLNode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class NodeManager {
     private List<FFGLNode> mFFGLNodeList;
+    private Map<String, FFGLNode> mFFGLNodeMap;
 
     public void init() {
         if (null == mFFGLNodeList)
