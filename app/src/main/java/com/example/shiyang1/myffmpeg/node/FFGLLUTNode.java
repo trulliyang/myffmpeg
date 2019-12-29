@@ -17,7 +17,7 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-public class FFGLFifthNode extends FFGLNode {
+public class FFGLLUTNode extends FFGLNode {
     class TextureInfo {
         int mTextureId;
         int mTextureWidth;
@@ -923,7 +923,10 @@ public class FFGLFifthNode extends FFGLNode {
             "    lowp vec4 newColor2 = texture2D(uTexture1, texPos2); \n"  +
 
             "    lowp vec4 newColor = mix(newColor1, newColor2, fract(blueColor)); \n"  +
-            "    gl_FragColor = mix(textureColor, vec4(newColor.rgb, textureColor.w), uIntensity); \n"  +
+
+//            "    gl_FragColor = mix(textureColor, vec4(newColor.rgb, textureColor.w), uIntensity); \n"  +
+            "    if (vTexCoord.x < uIntensity) gl_FragColor = vec4(newColor.rgb, textureColor.w); \n" +
+            "    else gl_FragColor = textureColor; \n" +
 
             "} \n";
 
@@ -981,7 +984,7 @@ public class FFGLFifthNode extends FFGLNode {
             "    gl_FragColor = vec4(invert, color.a);\n" +
             "} \n";
 
-    public FFGLFifthNode(Context context) {
+    public FFGLLUTNode(Context context) {
         mContext = context;
     }
 
@@ -1006,18 +1009,17 @@ public class FFGLFifthNode extends FFGLNode {
 //        dt += 0.01f;
 //        mProgress = (float) Math.abs(Math.sin(dt));
 
-        mProgress += 0.002;
-        mProgress = Math.min(mProgress, 1.0f);
+//        mProgress += 0.005;
 //        mProgress = mProgress-(int)mProgress;
 
 //        mProgress = 14.0f/15.0f;
 //        Log.e("shiyang", "shiyang progress="+mProgress);
 
-        mIntensity += 0.01;
-        mIntensity = mIntensity-(int)mIntensity;
+//        mIntensity += 0.01;
+//        mIntensity = mIntensity-(int)mIntensity;
 
 //        mIntensity = 14.0f/15.0f;
-
+        mIntensity = dt;
     }
 
     @Override
@@ -1093,7 +1095,7 @@ public class FFGLFifthNode extends FFGLNode {
     private void initTexture() {
         mTextureInfo0 = new TextureInfo();
         mTextureInfo0.mTextureId = FFGLTextureUtils.initTexture();
-        int rId0 = R.raw.a004;
+        int rId0 = R.raw.rp8;
         updateTexture(rId0, mTextureInfo0);
 
         Log.e("shiyang", "shiyang texid="+mTextureInfo0.mTextureId
@@ -1102,7 +1104,7 @@ public class FFGLFifthNode extends FFGLNode {
 
         mTextureInfo1 = new TextureInfo();
         mTextureInfo1.mTextureId = FFGLTextureUtils.initTexture();
-        int rId1 = R.raw.a003;
+        int rId1 = R.raw.lookup_amatorka;
         updateTexture(rId1, mTextureInfo1);
 
         Log.e("shiyang", "shiyang texid="+mTextureInfo1.mTextureId
@@ -1136,7 +1138,7 @@ public class FFGLFifthNode extends FFGLNode {
     }
 
     private void initShader() {
-//        String fs = mFragmentShaderStringFadeInOut;
+        String fs = mFragmentShaderStringFadeInOut;
 //        fs = mFragmentShaderStringZoomIn;
 //        fs = mFragmentShaderStringZoomOut;
 //        fs = mFragmentShaderStringMoveLeft;
@@ -1163,7 +1165,7 @@ public class FFGLFifthNode extends FFGLNode {
         String fs16 = mFragmentShaderStringWaterRripple;
         String fs17 = mFragmentShaderStringLUT;
         String fs18 = mFragmentShaderStringCharactor;
-        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString, fs16);
+        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString, fs17);
 //        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString1, mFragmentShaderString1);
     }
 
@@ -1185,11 +1187,19 @@ public class FFGLFifthNode extends FFGLNode {
 
     private void initMesh() {
         float a = 0.421875f;
+//        float w = 240.0f/720.0f;
+//        float h = 76.8f/1280.0f;
+//        float[] v = {
+//                0.6f, -0.8f,
+//                0.6f+w,-0.8f,
+//                0.6f, -0.8f+h,
+//                0.6f+w, -0.8f+h
+//        };
         float[] v = {
-                -1.0f, -1.0f*a,
-                +1.0f, -1.0f*a,
-                -1.0f, +1.0f*a,
-                +1.0f, +1.0f*a
+                -1f, -1f*a,
+                1f,  -1f*a,
+                -1f, 1f*a,
+                1f,  1f*a
         };
         ByteBuffer vb = ByteBuffer.allocateDirect(v.length * 4);
         vb.order(ByteOrder.nativeOrder());

@@ -7,6 +7,7 @@ import android.opengl.GLES20;
 import android.opengl.GLUtils;
 
 import com.example.shiyang1.myffmpeg.R;
+import com.example.shiyang1.myffmpeg.utils.FFGLFramebufferObjectUtils;
 import com.example.shiyang1.myffmpeg.utils.FFGLShaderUtils;
 import com.example.shiyang1.myffmpeg.utils.FFGLTextureUtils;
 
@@ -16,9 +17,11 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-public class FFGLThirdNode extends FFGLNode {
+public class FFGLBackgroundNode extends FFGLNode {
 
     private Context mContext;
+
+    private int mFramebufferObjectID = -111;
 
     private int mShaderProgramID = -111;
     private int mTexture0ID = -200;
@@ -50,22 +53,15 @@ public class FFGLThirdNode extends FFGLNode {
 
 
     private String mVertexShaderString = " \n" +
-            "attribute vec2 aTextureCoordinates; \n" +
             "attribute vec2 aPosition; \n" +
-            "varying vec2 vTexCoord; \n" +
             "void main() { \n" +
             "    gl_Position = vec4(aPosition, 0.0, 1.0); \n" +
-            "    vTexCoord = vec2(aTextureCoordinates.x, 1.0-aTextureCoordinates.y); \n" +
             "} \n";
 
     private String mFragmentShaderString = " \n" +
             "precision mediump float; \n" +
-            "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
             "void main() { \n" +
-            "    vec4 color = texture2D(uTexture0, vTexCoord); \n" +
-            "    float gray = dot(color.rgb, vec3(0.3,0.6,0.1));\n" +
-            "    gl_FragColor = vec4(vec3(gray), color.a);\n" +
+            "    gl_FragColor = vec4(0.1, 0.1, 0.1, 1.0); \n" +
             "} \n";
 
     private String mVertexShaderString1 = " \n" +
@@ -74,20 +70,24 @@ public class FFGLThirdNode extends FFGLNode {
             "varying vec2 vTexCoord; \n" +
             "void main() { \n" +
             "    gl_Position = vec4(aPosition, 0.0, 1.0); \n" +
-            "    vTexCoord = vec2(aTextureCoordinates.x, 1.0 - aTextureCoordinates.y); \n" +
+            "    vTexCoord = aTextureCoordinates; \n" +
             "} \n";
 
     private String mFragmentShaderString1 = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
             "void main() { \n" +
-            "    vec4 color = texture2D(uTexture0, vTexCoord); \n" +
-            "    vec3 invert = vec3(1.0) - color.rgb;\n" +
-            "    gl_FragColor = vec4(invert, color.a);\n" +
+            "    if (vTexCoord.x<0.5 && vTexCoord.y<0.5) " +
+            "        gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); \n" +
+            "    if (vTexCoord.x>=0.5 && vTexCoord.y<0.5) " +
+            "        gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0); \n" +
+            "    if (vTexCoord.x<0.5 && vTexCoord.y>=0.5) " +
+            "        gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0); \n" +
+            "    if (vTexCoord.x>=0.5 && vTexCoord.y>=0.5) " +
+            "        gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0); \n" +
             "} \n";
 
-    public FFGLThirdNode(Context context) {
+    public FFGLBackgroundNode(Context context) {
         mContext = context;
     }
 
@@ -143,14 +143,19 @@ public class FFGLThirdNode extends FFGLNode {
         }
     }
 
+    private void initFramebufferObject() {
+        mFramebufferObjectID = FFGLFramebufferObjectUtils.initFramebufferObject();
+//        fboBindTexture();
+    }
+
     private void initTexture() {
         mTexture0ID = FFGLTextureUtils.initTexture();
         updateTexture();
     }
 
     private void initShader() {
-//        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString, mFragmentShaderString);
-        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString1, mFragmentShaderString1);
+        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString, mFragmentShaderString);
+//        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString1, mFragmentShaderString1);
     }
 
     private void initAttribute(){
@@ -200,7 +205,7 @@ public class FFGLThirdNode extends FFGLNode {
     }
 
     private void updateTexture() {
-        InputStream is = mContext.getResources().openRawResource(R.raw.colorful2);
+        InputStream is = mContext.getResources().openRawResource(R.raw.sun);
         Bitmap bitmap = BitmapFactory.decodeStream(is);
         mTexture0OriginalWidth = bitmap.getWidth();
         mTexture0OriginalHeight = bitmap.getHeight();

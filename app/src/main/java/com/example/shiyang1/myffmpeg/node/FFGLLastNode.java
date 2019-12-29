@@ -68,7 +68,7 @@ public class FFGLLastNode extends FFGLNode {
     }
 
     @Override
-    public void update() {
+    public void update(float dt) {
 
     }
 

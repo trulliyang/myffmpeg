@@ -38,10 +38,10 @@ public class NodeManager {
         mFFGLNodeList.add(node);
     }
 
-    public void update() {
+    public void update(float dt) {
         if (null != mFFGLNodeList) {
             for (FFGLNode n: mFFGLNodeList) {
-                n.update();
+                n.update(dt);
             }
         }
     }

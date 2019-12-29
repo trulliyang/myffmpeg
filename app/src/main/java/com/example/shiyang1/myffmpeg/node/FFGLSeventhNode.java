@@ -997,7 +997,7 @@ public class FFGLSeventhNode extends FFGLNode {
     float dt = 0.0f;
 
     @Override
-    public void update() {
+    public void update(float dt) {
 //        if (mProgress >= 1.0f) mProgress = -0.01f;
 //        mProgress += 0.01;
 //        if (mProgress > 1.0f) mProgress = 1.0f;
@@ -1092,7 +1092,7 @@ public class FFGLSeventhNode extends FFGLNode {
     private void initTexture() {
         mTextureInfo0 = new TextureInfo();
         mTextureInfo0.mTextureId = FFGLTextureUtils.initTexture();
-        int rId0 = R.raw.wm;
+        int rId0 = R.raw.c000;
         updateTexture(rId0, mTextureInfo0);
 
         Log.e("shiyang", "shiyang texid="+mTextureInfo0.mTextureId
@@ -1184,13 +1184,13 @@ public class FFGLSeventhNode extends FFGLNode {
 
     private void initMesh() {
         float a = 0.421875f;
-        float w = 240.0f/720.0f;
-        float h = 76.8f/1280.0f;
+        float w = 1314.0f/4.0f/720.0f;
+        float h = 300.0f/4.0f/1280.0f;
         float[] v = {
-                0.6f, -0.8f,
-                0.6f+w,-0.8f,
-                0.6f, -0.8f+h,
-                0.6f+w, -0.8f+h
+                0.0f-w, 0.7f-h,
+                0.0f+w, 0.7f-h,
+                0.0f-w, 0.7f+h,
+                0.0f+w, 0.7f+h
         };
         ByteBuffer vb = ByteBuffer.allocateDirect(v.length * 4);
         vb.order(ByteOrder.nativeOrder());

@@ -4,7 +4,7 @@ public abstract class FFGLNode {
 
     public abstract void init();
 
-    public abstract void update();
+    public abstract void update(float dt);
 
     public abstract void render();
 

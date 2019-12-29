@@ -870,7 +870,7 @@ public class FFGLFourthNode extends FFGLNode {
     float dt = 0.0f;
 
     @Override
-    public void update() {
+    public void update(float dt) {
 //        if (mProgress >= 1.0f) mProgress = -0.01f;
 //        mProgress += 0.01;
 //        if (mProgress > 1.0f) mProgress = 1.0f;

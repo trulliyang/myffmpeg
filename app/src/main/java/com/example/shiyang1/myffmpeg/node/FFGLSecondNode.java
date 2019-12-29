@@ -103,7 +103,7 @@ public class FFGLSecondNode extends FFGLNode {
     }
 
     @Override
-    public void update() {
+    public void update(float dt) {
 
     }
 
