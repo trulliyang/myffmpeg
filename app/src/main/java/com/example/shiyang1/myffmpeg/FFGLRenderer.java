@@ -1,30 +1,23 @@
 package com.example.shiyang1.myffmpeg;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
 
 import com.example.shiyang1.myffmpeg.manager.NodeManager;
+import com.example.shiyang1.myffmpeg.manager.ParseManager;
 import com.example.shiyang1.myffmpeg.node.FFGLBackgroundNode;
 import com.example.shiyang1.myffmpeg.node.FFGLCharactorNode;
-import com.example.shiyang1.myffmpeg.node.FFGLEighthNode;
-import com.example.shiyang1.myffmpeg.node.FFGLFifthNode;
 import com.example.shiyang1.myffmpeg.node.FFGLFirstNode;
-import com.example.shiyang1.myffmpeg.node.FFGLFourthNode;
 import com.example.shiyang1.myffmpeg.node.FFGLFrameNode;
 import com.example.shiyang1.myffmpeg.node.FFGLLUTNode;
 import com.example.shiyang1.myffmpeg.node.FFGLMoveLeftProNode;
 import com.example.shiyang1.myffmpeg.node.FFGLMoveTopProNode;
-import com.example.shiyang1.myffmpeg.node.FFGLNinthNode;
 import com.example.shiyang1.myffmpeg.node.FFGLRockNode;
 import com.example.shiyang1.myffmpeg.node.FFGLRotateCCWProNode;
 import com.example.shiyang1.myffmpeg.node.FFGLSecondNode;
-import com.example.shiyang1.myffmpeg.node.FFGLSeventhNode;
 import com.example.shiyang1.myffmpeg.node.FFGLShakeNode;
-import com.example.shiyang1.myffmpeg.node.FFGLSixthNode;
-import com.example.shiyang1.myffmpeg.node.FFGLThirdNode;
 import com.example.shiyang1.myffmpeg.node.FFGLVibrateNode;
 import com.example.shiyang1.myffmpeg.node.FFGLWaterRippleNode;
 import com.example.shiyang1.myffmpeg.node.FFGLWatermarkNode;
@@ -35,14 +28,6 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class FFGLRenderer implements GLSurfaceView.Renderer {
     private FFGLFirstNode mFirstNode;
-    private FFGLSecondNode mSecondNode;
-    private FFGLThirdNode mThirdNode;
-    private FFGLFourthNode mFourthNode;
-    private FFGLFifthNode mFifthNode;
-    private FFGLSixthNode mSixthNode;
-    private FFGLSeventhNode mSeventhNode;
-    private FFGLEighthNode mEighthNode;
-    private FFGLNinthNode mNinthNode;
 
     private FFGLBackgroundNode mBackgroundNode;
     private FFGLFrameNode mFrameNode;
@@ -61,6 +46,8 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
 //    private FFGLYUV2RGBANode mYuvNode;
 
     private NodeManager mNodeManager;
+    private ParseManager mParseManager;
+
 
     private float mProgress = 0.0f;
 
@@ -201,25 +188,15 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
             mNodeManager = new NodeManager();
             mNodeManager.init();
         }
+        if (null == mParseManager) {
+            mParseManager = new ParseManager();
+            mParseManager.init();
+        }
     }
 
     private void initNode() {
         mFirstNode = new FFGLFirstNode(mContext);
         mFirstNode.init();
-        mSecondNode = new FFGLSecondNode(mContext);
-        mSecondNode.init();
-        mThirdNode = new FFGLThirdNode(mContext);
-        mThirdNode.init();
-        mFourthNode = new FFGLFourthNode(mContext);
-        mFourthNode.init();
-        mFifthNode = new FFGLFifthNode(mContext);
-        mFifthNode.init();
-        mSixthNode = new FFGLSixthNode(mContext);
-        mSixthNode.init();
-        mSeventhNode = new FFGLSeventhNode(mContext);
-        mSeventhNode.init();
-        mEighthNode = new FFGLEighthNode(mContext);
-        mEighthNode.init();
 
         mBackgroundNode = new FFGLBackgroundNode(mContext);
         mBackgroundNode.init();
@@ -251,11 +228,6 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
 
     private void addNode() {
         mNodeManager.addFFGLNode(mFirstNode);
-//        mNodeManager.addFFGLNode(mFourthNode);
-        mNodeManager.addFFGLNode(mFifthNode);
-        mNodeManager.addFFGLNode(mSixthNode);
-        mNodeManager.addFFGLNode(mSeventhNode);
-        mNodeManager.addFFGLNode(mEighthNode);
     }
 
     private void init() {
@@ -269,4 +241,6 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
             mNodeManager.destroy();
         }
     }
+
+
 }

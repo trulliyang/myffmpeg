@@ -1096,8 +1096,8 @@ public class FFGLFrameNode extends FFGLNode {
         updateTexture(rId0, mTextureInfo0);
 
         Log.e("shiyang", "shiyang texid="+mTextureInfo0.mTextureId
-                        +",w="+mTextureInfo0.mTextureWidth
-                        +",h="+mTextureInfo0.mTextureHeight);
+                +",w="+mTextureInfo0.mTextureWidth
+                +",h="+mTextureInfo0.mTextureHeight);
 
         mTextureInfo1 = new TextureInfo();
         mTextureInfo1.mTextureId = FFGLTextureUtils.initTexture();
@@ -1105,8 +1105,8 @@ public class FFGLFrameNode extends FFGLNode {
         updateTexture(rId1, mTextureInfo1);
 
         Log.e("shiyang", "shiyang texid="+mTextureInfo1.mTextureId
-                        +",w="+mTextureInfo1.mTextureWidth
-                        +",h="+mTextureInfo1.mTextureHeight);
+                +",w="+mTextureInfo1.mTextureWidth
+                +",h="+mTextureInfo1.mTextureHeight);
 
 //        mTexture2ID = FFGLTextureUtils.initTexture();
 //        int rId2 = R.raw.a002;
