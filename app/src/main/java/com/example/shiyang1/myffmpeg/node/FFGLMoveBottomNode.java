@@ -17,12 +17,13 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-public class FFGLRotateCCWProNode extends FFGLNode {
+public class FFGLMoveBottomNode extends FFGLNode {
     class TextureInfo {
         int mTextureId;
         int mTextureWidth;
         int mTextureHeight;
     };
+
 
     private Context mContext;
 
@@ -69,8 +70,10 @@ public class FFGLRotateCCWProNode extends FFGLNode {
     private int mTexture1OriginalWidth = 0;
     private int mTexture1OriginalHeight = 0;
 
+
     private TextureInfo mTextureInfo0;
     private TextureInfo mTextureInfo1;
+
 
     private ByteBuffer mGLReadPixelBuffer;
     private Bitmap mBitmapDump;
@@ -96,53 +99,22 @@ public class FFGLRotateCCWProNode extends FFGLNode {
             "    gl_FragColor = color0;\n" +
             "} \n";
 
-    private String mFragmentShaderStringRotateCCWPro = " \n" +
+    private String mFragmentShaderStringMoveBottom = " \n" +
             "precision mediump float; \n" +
             "varying vec2 vTexCoord; \n" +
             "uniform sampler2D uTexture0; \n" +
             "uniform sampler2D uTexture1; \n" +
             "uniform float uProgress; \n" +
-            "uniform float uTexture0Width; \n" +
-            "uniform float uTexture0Height; \n" +
-
-            "vec4 getColor(vec2 tc_origin) { \n" +
-            "    float theta = -6.2831853071796*uProgress;\n" +
-            "    float c = cos(theta);\n" +
-            "    float s = sin(theta);\n" +
-            "    vec2 tc_center_origin = 0.5*vec2(uTexture0Width, uTexture0Height); \n" +
-            "    vec2 tc_rot_origin = mat2(c, -s, s, c)*(tc_origin - tc_center_origin) + tc_center_origin;\n" +
-            "    vec2 tc_new = tc_rot_origin/vec2(uTexture0Width, uTexture0Height);\n" +
-            "    tc_new = abs(tc_new); \n" +
-            "    if (tc_new.x > 1.0) { tc_new.x = 2.0 - tc_new.x; } \n" +
-            "    if (tc_new.y > 1.0) { tc_new.y = 2.0 - tc_new.y; } \n" +
-            "    vec4 color0 = texture2D(uTexture0, tc_new); \n" +
-            "    vec4 color1 = texture2D(uTexture1, tc_new); \n" +
-            "    return mix(color0, color1, uProgress); \n" +
-            "} \n" +
-
             "void main() { \n" +
-            "    vec4 colorSum = vec4(0.0); \n" +
-            "    float prg = 1.0 - abs(1.0 - uProgress*2.0); \n" +
-            "    vec2 tc_origin = vTexCoord*vec2(uTexture0Width, uTexture0Height); \n" +
-            "    vec2 tc_center_origin = 0.5*vec2(uTexture0Width, uTexture0Height); \n" +
-            "    vec2 tc_delta_origin = tc_origin - tc_center_origin; \n" +
-            "    float alpha_origin = atan(tc_delta_origin.y, tc_delta_origin.x); \n" +
-            "    float len_origin = length(tc_delta_origin); \n" +
-            "    for (int i=0; i<=50; i++) {\n" +
-            "        float k = float(i); \n" +
-            "        float betaA_origin = alpha_origin + mix(0.0, 0.25, 0.02*k*prg); \n" +
-            "        vec2 tcNewA = tc_center_origin + len_origin*vec2(cos(betaA_origin), sin(betaA_origin));\n " +
-            "        colorSum += getColor(tcNewA); \n" +
-            "        float betaB_origin = alpha_origin + mix(0.0, -0.25, 0.02*k*prg); \n" +
-            "        vec2 tcNewB = tc_center_origin + len_origin*vec2(cos(betaB_origin), sin(betaB_origin));\n " +
-            "        colorSum += getColor(tcNewB); \n" +
-            "    } \n" +
-            "    colorSum /= 102.0; \n" +
-            "    gl_FragColor = clamp(colorSum, vec4(0.0), vec4(1.0)); \n" +
-//            "    gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0); \n" +
+            "    vec2 tc = vTexCoord - vec2(0.0, uProgress);\n" +
+            "    vec4 color = texture2D(uTexture0, tc);\n" +
+            "    if (tc.y < 0.0) {\n" +
+            "        color = texture2D(uTexture1, tc + vec2(0.0, 1.0));\n" +
+            "    }\n" +
+            "    gl_FragColor = color;\n" +
             "} \n";
 
-    public FFGLRotateCCWProNode(Context context) {
+    public FFGLMoveBottomNode(Context context) {
         mContext = context;
     }
 
@@ -300,8 +272,9 @@ public class FFGLRotateCCWProNode extends FFGLNode {
     }
 
     private void initShader() {
-        String fs10 = mFragmentShaderStringRotateCCWPro;
-        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString, fs10);
+//        String fs = mFragmentShaderStringFadeInOut;
+        String fs = mFragmentShaderStringMoveBottom;
+        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString, fs);
 //        mShaderProgramID = FFGLShaderUtils.initShader(mVertexShaderString1, mFragmentShaderString1);
     }
 
