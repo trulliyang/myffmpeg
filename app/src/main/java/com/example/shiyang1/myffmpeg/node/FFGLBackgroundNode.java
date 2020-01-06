@@ -64,29 +64,6 @@ public class FFGLBackgroundNode extends FFGLNode {
             "    gl_FragColor = vec4(0.1, 0.1, 0.1, 1.0); \n" +
             "} \n";
 
-    private String mVertexShaderString1 = " \n" +
-            "attribute vec2 aTextureCoordinates; \n" +
-            "attribute vec2 aPosition; \n" +
-            "varying vec2 vTexCoord; \n" +
-            "void main() { \n" +
-            "    gl_Position = vec4(aPosition, 0.0, 1.0); \n" +
-            "    vTexCoord = aTextureCoordinates; \n" +
-            "} \n";
-
-    private String mFragmentShaderString1 = " \n" +
-            "precision mediump float; \n" +
-            "varying vec2 vTexCoord; \n" +
-            "void main() { \n" +
-            "    if (vTexCoord.x<0.5 && vTexCoord.y<0.5) " +
-            "        gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); \n" +
-            "    if (vTexCoord.x>=0.5 && vTexCoord.y<0.5) " +
-            "        gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0); \n" +
-            "    if (vTexCoord.x<0.5 && vTexCoord.y>=0.5) " +
-            "        gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0); \n" +
-            "    if (vTexCoord.x>=0.5 && vTexCoord.y>=0.5) " +
-            "        gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0); \n" +
-            "} \n";
-
     public FFGLBackgroundNode(Context context) {
         mContext = context;
     }

@@ -99,25 +99,6 @@ public class FFGLWatermarkNode extends FFGLNode {
             "    gl_FragColor = color0;\n" +
             "} \n";
 
-    private String mVertexShaderString1 = " \n" +
-            "attribute vec2 aTextureCoordinates; \n" +
-            "attribute vec2 aPosition; \n" +
-            "varying vec2 vTexCoord; \n" +
-            "void main() { \n" +
-            "    gl_Position = vec4(aPosition, 0.0, 1.0); \n" +
-            "    vTexCoord = vec2(aTextureCoordinates.x, 1.0 - aTextureCoordinates.y); \n" +
-            "} \n";
-
-    private String mFragmentShaderString1 = " \n" +
-            "precision mediump float; \n" +
-            "varying vec2 vTexCoord; \n" +
-            "uniform sampler2D uTexture0; \n"  +
-            "void main() { \n" +
-            "    vec4 color = texture2D(uTexture0, vTexCoord); \n" +
-            "    vec3 invert = vec3(1.0) - color.rgb;\n" +
-            "    gl_FragColor = vec4(invert, color.a);\n" +
-            "} \n";
-
     public FFGLWatermarkNode(Context context) {
         mContext = context;
     }

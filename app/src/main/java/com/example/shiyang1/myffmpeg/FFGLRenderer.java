@@ -16,7 +16,6 @@ import com.example.shiyang1.myffmpeg.node.FFGLMoveLeftProNode;
 import com.example.shiyang1.myffmpeg.node.FFGLMoveTopProNode;
 import com.example.shiyang1.myffmpeg.node.FFGLRockNode;
 import com.example.shiyang1.myffmpeg.node.FFGLRotateCCWProNode;
-import com.example.shiyang1.myffmpeg.node.FFGLSecondNode;
 import com.example.shiyang1.myffmpeg.node.FFGLShakeNode;
 import com.example.shiyang1.myffmpeg.node.FFGLVibrateNode;
 import com.example.shiyang1.myffmpeg.node.FFGLWaterRippleNode;
@@ -151,7 +150,7 @@ public class FFGLRenderer implements GLSurfaceView.Renderer {
                 mLUTNode.render();
             }
         }
-        mProgress += 0.005f;
+        mProgress += 0.016f;
         if (null != mFrameNode) {
             mFrameNode.update(dt);
             mFrameNode.render();
